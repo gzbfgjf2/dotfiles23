@@ -1,0 +1,119 @@
+font:
+  normal:
+    family: Cascadia Mono
+    # family: SF mono
+    # family: UbuntuMono
+    # family: Monospace
+    # family: Consolas
+    # family: Menlo
+    family: FixedsysExcelsioriiib Nerd Font Mono
+    # family: Comic Mono
+    # family: InconsolataGo Nerd Font Mono
+    # family: UbuntuMono Nerd Font Mono
+    style: Regular
+    # style: Bold
+  
+  bold:
+    # family: 
+    style: Regular
+    style: Bold
+  
+  size: 12
+  # size: 20
+  # size: 24
+
+
+window:
+  gtk_theme_variant: light
+  gtk_theme_variant: dark
+  position:
+    x: 600
+    y: 200
+  padding:
+    x: 0
+    y: 0
+  opacity: 1
+  dimensions:
+    lines: 50
+    columns: 80
+  decorations: full
+  # startup_mode: Fullscreen
+  startup_mode: Windowed
+  # startup_mode: Maximized
+  dynamic_padding: true
+
+# bell:
+#   command:
+#     program: paplay
+#     args: ["/usr/share/sounds/Yaru/stereo/bell.oga"]
+
+
+key_bindings:
+  - { key: F11, action: ToggleFullscreen }
+  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  # - { key: B,      mods: Control,       mode: Vi|~Search, action: ReceiveChar}
+
+
+colors:
+  # Default colors
+  primary:
+    background: '0x282c34'
+    foreground: '0xabb2bf'
+
+    # Bright and dim foreground colors
+    #
+    # The dimmed foreground color is calculated automatically if it is not present.
+    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+    # is `false`, the normal foreground color will be used.
+    #dim_foreground: '0x9a9a9a'
+    bright_foreground: '0xe6efff'
+
+  # Cursor colors
+  #
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
+  #cursor:
+  #  text: '0x000000'
+  #  cursor: '0xffffff'
+
+  # Normal colors
+  normal:
+    black:   '0x1e2127'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0x828791'
+
+  # Bright colors
+  bright:
+    black:   '0x5c6370'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xe6efff'
+
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  dim:
+    black:   '0x1e2127'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0x828791'
+
+  # Indexed Colors
+  #
+  # The indexed colors include all colors from 16 to 256.
+  # When these are not set, they're filled with sensible defaults.
+  #indexed_colors:

@@ -1,0 +1,9 @@
+#! /bin/sh
+
+uname=$(uname);
+echo $uname
+
+ln -s ~/src/dotfiles/fish ~/.config/fish
+ln -s ~/src/dotfiles/nvim ~/.config/nvim
+ln -s ~/src/dotfiles/alacritty ~/.config/alacritty
+

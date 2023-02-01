@@ -1,0 +1,5 @@
+#! /bin/sh
+
+rm ~/.config/fish
+rm ~/.config/nvim
+rm ~/.config/alacritty
