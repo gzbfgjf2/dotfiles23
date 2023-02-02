@@ -1,21 +1,21 @@
 font:
   normal:
-    family: Cascadia Mono
+    # family: Cascadia Mono
     # family: SF mono
-    # family: UbuntuMono
+    family: UbuntuMono
     # family: Monospace
     # family: Consolas
     # family: Menlo
-    family: FixedsysExcelsioriiib Nerd Font Mono
+    # family: FixedsysExcelsioriiib Nerd Font Mono
     # family: Comic Mono
     # family: InconsolataGo Nerd Font Mono
     # family: UbuntuMono Nerd Font Mono
-    style: Regular
-    # style: Bold
+    # style: Regular
+    style: Bold
   
   bold:
     # family: 
-    style: Regular
+    # style: Regular
     style: Bold
   
   size: 12
