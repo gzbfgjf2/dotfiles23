@@ -46,6 +46,7 @@ local markdown_preview_ops = {
   run = function() vim.fn["mkdp#util#install"]() end,
 }
 
+vim.g.vimtex_view_method = "zathura"
 
 local packer_bootstrap = ensure_packer()
 
@@ -512,10 +513,6 @@ require("telescope").setup({
 local vim = vim
 local opt = vim.opt
 
--- vim.opt.fillchars = {
--- 	eob = " ",
--- 	fold = " ",
--- }
 
 
 -- Mappings.

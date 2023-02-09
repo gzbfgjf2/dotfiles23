@@ -15,6 +15,12 @@ vim.o.tw = 79
 vim.o.nuw = 1
 vim.opt.foldopen:remove({ "block" })
 
+-- vim.opt.fillchars = {
+	-- eob = " ",
+	-- fold = " ",
+  -- stl = " ",
+
+-- }
 
 -- cmd
 vim.cmd 'filetype plugin indent on'
@@ -109,9 +115,9 @@ vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", {noremap=true}
 
 
 -- hightlight
-vim.api.nvim_set_hl(0, 'StatusLine', { bg = "bg" })
-vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = "bg" })
-vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "fg" })
+-- vim.api.nvim_set_hl(0, 'StatusLine', { bg = "bg" })
+-- vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = "bg" })
+-- vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "fg" })
 -- vim.api.nvim_set_hl(0, 'Comment', { gui = false })
 -- vim.api.nvim_set_hl(0, 'Error', { fg = "#ffffff", undercurl = true })
 -- vim.api.nvim_set_hl(0, 'Cursor', { reverse = true })
