@@ -16,9 +16,9 @@ vim.o.nuw = 1
 vim.opt.foldopen:remove({ "block" })
 
 -- vim.opt.fillchars = {
-	-- eob = " ",
-	-- fold = " ",
-  -- stl = " ",
+-- eob = " ",
+-- fold = " ",
+-- stl = " ",
 
 -- }
 
@@ -68,16 +68,16 @@ vim.cmd([[
 
 -- autocmd
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "javascript", "html", "css"},
-	command = "setlocal shiftwidth=2 tabstop=2",
+  pattern = { "javascript", "html", "css" },
+  command = "setlocal shiftwidth=2 tabstop=2",
 })
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "yaml" },
-	command = "setlocal ts=2 sts=2 sw=2 expandtab",
+  pattern = { "yaml" },
+  command = "setlocal ts=2 sts=2 sw=2 expandtab",
 })
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lua" },
-	command = "setlocal ts=2 sts=2 sw=2 expandtab",
+  pattern = { "lua" },
+  command = "setlocal ts=2 sts=2 sw=2 expandtab",
 })
 vim.cmd([[
   augroup Python
@@ -92,21 +92,25 @@ autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 
 
 
 -- keymaps
-vim.keymap.set('n', '<BS>', ':', {noremap=true})
-vim.keymap.set('n', "<Leader>ecfv", ":e ~/.config/nvim/plugin/config.vim<Enter>", {noremap=true})
-vim.keymap.set('n', "<Leader>scfv", ":so ~/.config/nvim/plugin/config.vim<Enter>", {noremap=true})
-vim.keymap.set('n', "<Leader>einl", ":e ~/.config/nvim/init.lua<Enter>", {noremap=true})
-vim.keymap.set('n', "<Leader>eluf", ":e ~/.config/nvim/lua/usr<Enter>", {noremap=true})
-vim.keymap.set('n', "<Leader>sinl", ":luafile ~/.config/nvim/init.lua<Enter>", {noremap=true})
-vim.keymap.set('n', "<Leader>ealy", ":e ~/.config/alacritty/alacritty.yml<Enter>", {noremap=true})
-vim.keymap.set('n', "<Leader>etdt", ":e ~/.todo/todo.txt<Enter>", {noremap=true})
-vim.keymap.set('n', "<Leader>ecff", ":e ~/.config/fish/config.fish<Enter>", {noremap=true})
-vim.keymap.set('t', "<Esc>", "<C-\\><C-n>", {noremap=true})
-vim.keymap.set('n', "<Leader>i", "dd<up>o", {noremap=true})
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", {noremap=true})
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", {noremap=true})
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", {noremap=true})
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", {noremap=true})
+vim.keymap.set('n', '<BS>', ':', { noremap = true })
+vim.keymap.set('n', "<Leader>ecfv", ":e ~/.config/nvim/plugin/config.vim<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>scfv", ":so ~/.config/nvim/plugin/config.vim<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>einl", ":e ~/.config/nvim/init.lua<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>eluf", ":e ~/.config/nvim/lua/usr<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>sinl", ":luafile ~/.config/nvim/init.lua<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>ealy", ":e ~/.config/alacritty/alacritty.yml<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>etdt", ":e ~/.todo/todo.txt<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>ecff", ":e ~/.config/fish/config.fish<Enter>", { noremap = true })
+vim.keymap.set('t', "<Esc>", "<C-\\><C-n>", { noremap = true })
+vim.keymap.set('n', "<Leader>i", "dd<up>o", { noremap = true })
+vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true })
+vim.keymap.set("n", "<c-d>", "<c-d>zz0", { noremap = true })
+vim.keymap.set("n", "<c-u>", "<c-u>zz0", { noremap = true })
+vim.keymap.set("n", "<c-f>", "<c-f>zz0", { noremap = true })
+vim.keymap.set("n", "<c-b>", "<c-b>zz0", { noremap = true })
 -- vim.cmd(' let mapleader = \"\\<BS>\" ')
 -- vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', true, false, true)
 -- vim.g.mapleader = "<80>kb"
@@ -121,3 +125,4 @@ vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", {noremap=true}
 -- vim.api.nvim_set_hl(0, 'Comment', { gui = false })
 -- vim.api.nvim_set_hl(0, 'Error', { fg = "#ffffff", undercurl = true })
 -- vim.api.nvim_set_hl(0, 'Cursor', { reverse = true })
+vim.api.nvim_set_hl(0, 'EndofBuffer', { fg = "#5c6370" })

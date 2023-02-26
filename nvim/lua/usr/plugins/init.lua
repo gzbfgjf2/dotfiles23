@@ -79,7 +79,7 @@ require("packer").startup(function(use)
   use "qpkorr/vim-bufkill"
   use { 'ggandor/leap.nvim',
     config = function()
-      require('leap').set_default_keymaps(true)
+      require('leap').add_default_mappings()
     end, }
   use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
   use 'junegunn/goyo.vim'
