@@ -6,14 +6,18 @@ vim.o.cmdheight = 0
 vim.o.laststatus = 0
 vim.o.syntax = true
 vim.o.tabstop = 4
-vim.o.shitwidth = 4
+vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.autoindent = true
 vim.o.splitright = true
 vim.o.signcolumn = "no"
 vim.o.tw = 79
 vim.o.nuw = 1
+vim.o.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
+-- vim.o.guicursor= "v-c-sm:block,n-i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.foldopen:remove({ "block" })
+vim.o.so=999
+vim.o.ve="onemore"
 
 -- vim.opt.fillchars = {
 -- eob = " ",
@@ -87,9 +91,10 @@ vim.cmd([[
   augroup END
 ]])
 vim.cmd([[
-autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"zz" | endif
 ]])
-
+-- vim.cmd[[:nnoremap <silent> <CR> :nohlsearch<CR><CR>]]
+vim.cmd[[autocmd InsertLeave * :normal `^]]
 
 -- keymaps
 vim.keymap.set('n', '<BS>', ':', { noremap = true })
@@ -111,6 +116,11 @@ vim.keymap.set("n", "<c-d>", "<c-d>zz0", { noremap = true })
 vim.keymap.set("n", "<c-u>", "<c-u>zz0", { noremap = true })
 vim.keymap.set("n", "<c-f>", "<c-f>zz0", { noremap = true })
 vim.keymap.set("n", "<c-b>", "<c-b>zz0", { noremap = true })
+vim.keymap.set("n", "h", "hzz", { noremap = true })
+vim.keymap.set("n", "j", "jzz", { noremap = true })
+vim.keymap.set("n", "k", "kzz", { noremap = true })
+vim.keymap.set("n", "l", "lzz", { noremap = true })
+vim.keymap.set("n", "G", "Gzz", { noremap = true })
 -- vim.cmd(' let mapleader = \"\\<BS>\" ')
 -- vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', true, false, true)
 -- vim.g.mapleader = "<80>kb"
