@@ -3,6 +3,7 @@
 SETUVAR CONDA_LEFT_PROMPT:true
 SETUVAR EDITOR:nvim
 SETUVAR --export OPENAI_API_KEY:sk\x2dfBwHB7xkbgiCJBY8I3EJZu42VE0WtGpIiMAIsRDz
+SETUVAR --export PYENV_ROOT:/home/luffyx/\x2epyenv
 SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/keyring/ssh
 SETUVAR --export USE_GKE_GCLOUD_AUTH_PLUGIN:True
 SETUVAR __fish_initialized:3400
@@ -51,6 +52,7 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
+SETUVAR fish_user_paths:/home/luffyx/\x2epyenv/bin
 SETUVAR nvm_data:/home/luffyx/\x2elocal/share/nvm
 SETUVAR nvm_default_version:v16\x2e17\x2e0
 SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist

@@ -11,6 +11,7 @@ end
 
 
 local packer_sync = function()
+  local packer_bootstrap = ensure_packer()
   if packer_bootstrap then
     require('packer').sync()
   end
@@ -48,7 +49,6 @@ local markdown_preview_ops = {
 
 vim.g.vimtex_view_method = "zathura"
 
-local packer_bootstrap = ensure_packer()
 
 require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
@@ -64,7 +64,7 @@ require("packer").startup(function(use)
   use(markdown_preview_ops)
   use "kyazdani42/nvim-web-devicons"
   -- use("kyazdani42/nvim-tree.lua")
-  use "tomasiser/vim-code-dark"
+  -- use "tomasiser/vim-code-dark"
   -- use('joshdick/onedark.vim')
   use "lervag/vimtex"
   use { "numToStr/Comment.nvim",
@@ -76,34 +76,36 @@ require("packer").startup(function(use)
   }
   use "navarasu/onedark.nvim"
   use "tpope/vim-fugitive"
-  use "qpkorr/vim-bufkill"
-  use { 'ggandor/leap.nvim',
-    config = function()
-      require('leap').add_default_mappings()
-    end, }
+  -- use "qpkorr/vim-bufkill"
+  -- use { 'ggandor/leap.nvim',
+  --   config = function()
+  --     require('leap').add_default_mappings()
+  --   end, }
   use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
-  use 'junegunn/goyo.vim'
-  use { 'lewis6991/gitsigns.nvim' }
+  -- use 'junegunn/goyo.vim'
+  -- use { 'lewis6991/gitsigns.nvim' }
   -- use 'folke/tokyonight.nvim'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-  use 'windwp/nvim-ts-autotag'
-  --  use({
-  --  "folke/noice.nvim",
-  --  event = "VimEnter",
-  --  config = function()
-  --    require("noice").setup()
-  --  end,
-  --  requires = {
-  --    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --    "MunifTanjim/nui.nvim",
-  --    "rcarriga/nvim-notify",
-  --    }
-  --})
-  -- use "jose-elias-alvarez/null-ls.nvim"
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/nvim-cmp"
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+  use { "windwp/nvim-ts-autotag", config = function() require('nvim-ts-autotag').setup() end }
+  -- use({ "folke/noice.nvim",
+  --   -- event = "VimEnter",
+  --   config = function()
+  --     require("noice").setup()
+  --   end,
+  --   requires = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- })
 
   use { "jose-elias-alvarez/null-ls.nvim",
     config = function()
@@ -119,14 +121,13 @@ require("packer").startup(function(use)
     end,
     requires = { "nvim-lua/plenary.nvim" },
   }
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use "JoosepAlviste/nvim-ts-context-commentstring"
   packer_sync()
 
 end)
 
 require 'onedark'.load()
 
-require('nvim-ts-autotag').setup()
 
 -- require('gitsigns').setup()
 -- use {
@@ -213,10 +214,11 @@ vim.o.foldcolumn = "0"
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+
 -- opt.foldmethod = "expr"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-vim.o.updatetime = 250
+-- vim.o.updatetime = 250
 -- vim.cmd([[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
 -- require("neorg").setup({
 -- 	-- ... -- check out setup part...
@@ -251,7 +253,8 @@ require("nvim-treesitter.configs").setup({
 
   highlight = {
     -- `false` will disable the whole extension
-    enable = true,
+    -- enable = true,
+    enable = false,
 
     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
@@ -294,7 +297,7 @@ vim.cmd([[highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40]])
 -- vim.cmd [[highlight Normal guibg=#131313]]
 require("indent_blankline").setup({
   space_char_blankline = " ",
-  -- show_current_context = true,
+  show_current_context = false,
   -- show_current_context_space = true,
   -- show_current_context_start = false,
   -- show_first_indent_level = false,
@@ -309,7 +312,7 @@ require("indent_blankline").setup({
   },
   show_trailing_blankline_indent = false,
 })
-require("Comment").setup()
+-- require("Comment").setup()
 
 -- highlights
 vim.cmd([[hi LineNr ctermfg=None]])
@@ -550,6 +553,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
   vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format { async = true } end, bufopts)
+
+  client.server_capabilities.semanticTokensProvider = nil
 end
 
 -- vim.fn.sign_define(

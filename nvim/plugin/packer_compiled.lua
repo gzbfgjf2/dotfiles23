@@ -100,26 +100,10 @@ _G.packer_plugins = {
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["gitsigns.nvim"] = {
-    loaded = true,
-    path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
-    url = "https://github.com/lewis6991/gitsigns.nvim"
-  },
-  ["goyo.vim"] = {
-    loaded = true,
-    path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/goyo.vim",
-    url = "https://github.com/junegunn/goyo.vim"
-  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
-  },
-  ["leap.nvim"] = {
-    config = { "\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0" },
-    loaded = true,
-    path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/leap.nvim",
-    url = "https://github.com/ggandor/leap.nvim"
   },
   ["markdown-preview.nvim"] = {
     loaded = true,
@@ -137,6 +121,12 @@ _G.packer_plugins = {
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
     url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
+  ["nvim-autopairs"] = {
+    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
+    loaded = true,
+    path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -148,7 +138,7 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-surround"] = {
-    config = { "\27LJ\2\n|\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\0\1\0\2\16visual_line\14<leader>s\vvisual\14<leader>s\nsetup\18nvim-surround\frequire\0" },
+    config = { "\27LJ\2\n|\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\0\1\0\2\vvisual\14<leader>s\16visual_line\14<leader>s\nsetup\18nvim-surround\frequire\0" },
     loaded = true,
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/nvim-surround",
     url = "https://github.com/kylechui/nvim-surround"
@@ -159,6 +149,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-ts-autotag"] = {
+    config = { "\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20nvim-ts-autotag\frequire\0" },
     loaded = true,
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
@@ -203,16 +194,6 @@ _G.packer_plugins = {
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["vim-bufkill"] = {
-    loaded = true,
-    path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/vim-bufkill",
-    url = "https://github.com/qpkorr/vim-bufkill"
-  },
-  ["vim-code-dark"] = {
-    loaded = true,
-    path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/vim-code-dark",
-    url = "https://github.com/tomasiser/vim-code-dark"
-  },
   ["vim-fish"] = {
     loaded = true,
     path = "/home/luffyx/.local/share/nvim/site/pack/packer/start/vim-fish",
@@ -236,22 +217,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-try_loadstring("\27LJ\2\n¨\1\0\0\a\0\t\0\0236\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\a\0004\3\3\0006\4\0\0'\6\1\0B\4\2\0029\4\3\0049\4\4\0049\4\5\4>\4\1\0036\4\0\0'\6\1\0B\4\2\0029\4\3\0049\4\4\0049\4\6\4>\4\2\3=\3\b\2B\0\2\1K\0\1\0\fsources\1\0\0\14prettierd\nblack\15formatting\rbuiltins\nsetup\fnull-ls\frequire\0", "config", "null-ls.nvim")
-time([[Config for null-ls.nvim]], false)
 -- Config for: nvim-surround
 time([[Config for nvim-surround]], true)
-try_loadstring("\27LJ\2\n|\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\0\1\0\2\16visual_line\14<leader>s\vvisual\14<leader>s\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
+try_loadstring("\27LJ\2\n|\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\0\1\0\2\vvisual\14<leader>s\16visual_line\14<leader>s\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
 time([[Config for nvim-surround]], false)
--- Config for: leap.nvim
-time([[Config for leap.nvim]], true)
-try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0", "config", "leap.nvim")
-time([[Config for leap.nvim]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n \1\0\0\6\0\a\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\5\0006\3\0\0'\5\3\0B\3\2\0029\3\4\3B\3\1\2=\3\6\2B\0\2\1K\0\1\0\rpre_hook\1\0\0\20create_pre_hook7ts_context_commentstring.integrations.comment_nvim\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: null-ls.nvim
+time([[Config for null-ls.nvim]], true)
+try_loadstring("\27LJ\2\n¨\1\0\0\a\0\t\0\0236\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\a\0004\3\3\0006\4\0\0'\6\1\0B\4\2\0029\4\3\0049\4\4\0049\4\5\4>\4\1\0036\4\0\0'\6\1\0B\4\2\0029\4\3\0049\4\4\0049\4\6\4>\4\2\3=\3\b\2B\0\2\1K\0\1\0\fsources\1\0\0\14prettierd\nblack\15formatting\rbuiltins\nsetup\fnull-ls\frequire\0", "config", "null-ls.nvim")
+time([[Config for null-ls.nvim]], false)
+-- Config for: nvim-ts-autotag
+time([[Config for nvim-ts-autotag]], true)
+try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20nvim-ts-autotag\frequire\0", "config", "nvim-ts-autotag")
+time([[Config for nvim-ts-autotag]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
