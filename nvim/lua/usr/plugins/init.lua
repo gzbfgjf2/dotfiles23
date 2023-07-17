@@ -18,6 +18,7 @@ local packer_sync = function()
 end
 
 
+ensure_packer()
 local treesitter_ops = {
   "nvim-treesitter/nvim-treesitter",
   run = function()
@@ -47,11 +48,20 @@ local markdown_preview_ops = {
   run = function() vim.fn["mkdp#util#install"]() end,
 }
 
-vim.g.vimtex_view_method = "zathura"
+-- vim.g.vimtex_view_method = "zathura"
 
 
 require("packer").startup(function(use)
+  use { "catppuccin/nvim", as = "catppuccin" }
   use "wbthomason/packer.nvim"
+  -- use "sonph/onehalf"
+  use {
+    "sonph/onehalf",
+    rtp = "vim/",
+    -- config = function() vim.cmd("colorscheme onehalfdark") end
+  }
+  use 'yorickpeterse/nvim-grey'
+  use 'mbbill/undotree'
   use "nvim-lua/plenary.nvim"
   use "nvim-telescope/telescope.nvim"
   use(treesitter_ops)
@@ -62,11 +72,16 @@ require("packer").startup(function(use)
   use "dag/vim-fish"
   use "lukas-reineke/indent-blankline.nvim"
   use(markdown_preview_ops)
-  use "kyazdani42/nvim-web-devicons"
+  -- use "kyazdani42/nvim-web-devicons"
   -- use("kyazdani42/nvim-tree.lua")
   -- use "tomasiser/vim-code-dark"
-  -- use('joshdick/onedark.vim')
-  use "lervag/vimtex"
+  -- use "joshdick/onedark.vim"
+  use {"lervag/vimtex",
+    config = function()
+      vim.g.vimtex_fold_enabled = true
+      vim.g.vimtex_syntax_enabled = 0
+    end
+  }
   use { "numToStr/Comment.nvim",
     config = function()
       require('Comment').setup {
@@ -74,14 +89,24 @@ require("packer").startup(function(use)
       }
     end,
   }
-  use "navarasu/onedark.nvim"
+  use { "navarasu/onedark.nvim",
+    config = function()
+      require('onedark').setup {
+        -- style = 'dark',
+        -- highlights = {
+        --   IndentBlanklineIndent1 = { fg = "$red", guibg = "$yellow" },
+        --   IndentBlanklineIndent2 = { fg = "$blue", guibg = "$green" },
+        -- }
+      }
+    end,
+  }
   use "tpope/vim-fugitive"
   -- use "qpkorr/vim-bufkill"
   -- use { 'ggandor/leap.nvim',
   --   config = function()
   --     require('leap').add_default_mappings()
   --   end, }
-  use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
+  -- use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
   -- use 'junegunn/goyo.vim'
   -- use { 'lewis6991/gitsigns.nvim' }
   -- use 'folke/tokyonight.nvim'
@@ -90,23 +115,63 @@ require("packer").startup(function(use)
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
   use "hrsh7th/nvim-cmp"
-  use {
-    "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-  }
+  -- use {
+  --   "windwp/nvim-autopairs",
+  --   config = function() require("nvim-autopairs").setup {} end
+  -- }
   use { "windwp/nvim-ts-autotag", config = function() require('nvim-ts-autotag').setup() end }
-  -- use({ "folke/noice.nvim",
-  --   -- event = "VimEnter",
-  --   config = function()
-  --     require("noice").setup()
-  --   end,
-  --   requires = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   }
-  -- })
+  use({
+    "folke/noice.nvim",
+    -- event = "VimEnter",
+    -- opt = true,
 
+    config = function()
+      require("noice").setup({
+        -- views = {
+        --   cmdline_popup = {
+        --     border = {
+        --       style = "none",
+        --       padding = { 1, 1 },
+        --     },
+        --     filter_options = {},
+        --     win_options = {
+        --       winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+        --     },
+        --   },
+        -- },
+        cmdline = {
+          -- enabled = false,
+          view = "cmdline",
+          format = {
+            -- conceal = false,
+            cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+            -- search_down = { kind = "search", pattern = "^/", icon = "", lang = "regex" },
+            -- search_up = { kind = "search", pattern = "^%?", icon = "", lang = "regex" },
+            -- cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+            search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
+            search_up = { kind = "search", pattern = "^%?", icon = "?", lang = "regex" },
+          }
+        },
+        messages = {
+          -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+          -- This is a current Neovim limitation.
+          -- enabled = false,            -- enables the Noice messages UI
+          view = "mini",             -- default view for messages
+          view_error = "mini",       -- view for errors
+          view_warn = "mini",        -- view for warnings
+          view_history = "messages", -- view for :messages
+          -- view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+          view_search = false,       -- view for search count messages. Set to `false` to disable
+        }
+      })
+    end,
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  })
+  --
   use { "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("null-ls").setup({
@@ -122,12 +187,97 @@ require("packer").startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
   }
   use "JoosepAlviste/nvim-ts-context-commentstring"
+  -- use { 'echasnovski/mini.starter',
+  --   config = function()
+  --     local starter = require('mini.starter')
+  --     require('mini.starter').setup({
+  --       content_hooks = {
+  --         --   starter.gen_hook.adding_bullet(""),
+  --         starter.gen_hook.aligning("center", "center"),
+  --       },
+  --       -- evaluate_single = true,
+  --       -- footer = os.date(),
+  --       footer = "",
+  --       header = "Let's go!",
+  --       -- header = table.concat({
+  --
+  --         -- [[ ██▀███   █    ██  ███▄    █ ██▒   █▓ ██▓ ███▄ ▄███▓]],
+  --         -- [[▓██ ▒ ██▒ ██  ▓██▒ ██ ▀█   █▓██░   █▒▓██▒▓██▒▀█▀ ██▒]],
+  --         -- [[▓██ ░▄█ ▒▓██  ▒██░▓██  ▀█ ██▒▓██  █▒░▒██▒▓██    ▓██░]],
+  --         -- [[▒██▀▀█▄  ▓▓█  ░██░▓██▒  ▐▌██▒ ▒██ █░░░██░▒██    ▒██ ]],
+  --         -- [[░██▓ ▒██▒▒▒█████▓ ▒██░   ▓██░  ▒▀█░  ░██░▒██▒   ░██▒]],
+  --         -- [[░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒ ░ ▒░   ▒ ▒   ░ ▐░  ░▓  ░ ▒░   ░  ░]],
+  --         -- [[  ░▒ ░ ▒░░░▒░ ░ ░ ░ ░░   ░ ▒░  ░ ░░   ▒ ░░  ░      ░]],
+  --         -- [[  ░░   ░  ░░░ ░ ░    ░   ░ ░     ░░   ▒ ░░      ░   ]],
+  --         -- [[   ░        ░              ░      ░   ░         ░   ]],
+  --         -- [[                                 ░                  ]]
+  --         -- [[  /\ \▔\___  ___/\   /(●)_ __ ___  ]],
+  --         -- [[ /  \/ / _ \/ _ \ \ / / | '_ ` _ \ ]],
+  --         -- [[/ /\  /  __/ (_) \ V /| | | | | | |]],
+  --         -- [[\_\ \/ \___|\___/ \_/ |_|_| |_| |_|]],
+  --         -- [[───────────────────────────────────]],
+  --         -- [[                  __I__                                  ]],
+  --         -- [[   .-'"  .  "'-.                                         ]],
+  --         -- [[ .'  / . ' . \  '.                                       ]],
+  --         -- [[/_.-..-..-..-..-._\ .---------------------------------.  ]],
+  --         -- [[         #  _,,_   ( I hear it might rain people today ) ]],
+  --         -- [[         #/`    `\ /'---------------------------------'  ]],
+  --         -- [[         / / 6 6\ \                                      ]],
+  --         -- [[         \/\  Y /\/       /\-/\                          ]],
+  --         -- [[         #/ `'U` \       /a a  \               _         ]],
+  --         -- [[       , (  \   | \     =\ Y  =/-~~~~~~-,_____/ )        ]],
+  --         -- [[       |\|\_/#  \_/       '^--'          ______/         ]],
+  --         -- [[       \/'.  \  /'\         \           /                ]],
+  --         -- [[        \    /=\  /         ||  |---'\  \                ]],
+  --         -- [[   jgs  /____)/____)       (_(__|   ((__|                ]],
+  --       -- }, "\n"),
+  --       query_updaters = [[abcdefghilmoqrstuvwxyz0123456789_-,.ABCDEFGHIJKLMOQRSTUVWXYZ]],
+  --       -- items = {},
+  --       -- starter.gen_hook.aligning("center", "center"),
+  --       -- items = {
+  --       --   { action = "tab G",      name = "G: Fugitive",       section = "Git" },
+  --       --   { action = "PackerSync", name = "U: Update Plugins", section = "Plugins" },
+  --       --   { action = "enew",       name = "E: New Buffer",     section = "Builtin actions" },
+  --       --   { action = "qall!",      name = "Q: Quit Neovim",    section = "Builtin actions" },
+  --       -- },
+  --       -- items = {
+  --       --   starter.sections.telescope(),
+  --       -- }
+  --     })
+  --   end,
+  -- }
+    -- use { 'mhinz/vim-startify',
+    --   config = function()
+    --     -- let g:startify_custom_header =
+    --     -- \ 'startify#center(startify#fortune#cowsay())'
+    --     -- vim.cmd([[
+    --     --   let g:startify_custom_header =
+    --     --      \ 'startify#center(startify#fortune#cowsay())'
+    --     --   let g:startify_lists = [
+    --     --   \ { 'type': 'dir',       'header': startify#center(['MRU '.getcwd()]) },
+    --     --   \ { 'type': 'sessions',  'header': startify#center(['Sessions']) },
+    --     --   \ { 'type': 'files',     'header': startify#center(['MRU']) },
+    --     --   \ { 'type': 'bookmarks', 'header': startify#center(['Bookmarks']) },
+    --     --   \ { 'type': 'commands',  'header': startify#center(['Commands']) },
+    --     --   \ ]
+    --     --   let g:startify_left_padding = 1000 " Hard coded padding for lists
+    --     --
+    --     -- ]])
+    --   end,
+    -- }
+  -- use 'ThePrimeagen/harpoon'
+  -- use {
+  use {'declancm/cinnamon.nvim',
+    config = function() require('cinnamon').setup() end
+  }
   packer_sync()
-
 end)
 
-require 'onedark'.load()
+-- require("telescope").load_extension('harpoon')
 
+-- vim.cmd[[colorscheme onedark]]
+vim.g.vimtex_quickfix_ignore_filters = { 'Underfull', 'Overfull' }
+-- require 'catppuccin'.setup({flavour="latte"})
 
 -- require('gitsigns').setup()
 -- use {
@@ -183,36 +333,36 @@ vim.diagnostic.config({
 --   sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
 --   sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
 -- ]]
-require("ufo").setup({
-  provider_selector = function(bufnr, filetype, buftype)
-    return { "treesitter", "indent" }
-  end,
-})
-
--- Option 2: nvim lsp as LSP client
--- Tell the server the capability of foldingRange,
--- Neovim hasn't added foldingRange to default capabilities, users must add it manually
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.foldingRange = {
---     dynamicRegistration = false,
---     lineFoldingOnly = true
--- }
--- local language_servers = {} -- like {'gopls', 'clangd'}
--- for _, ls in ipairs(language_servers) do
---     require('lspconfig')[ls].setup({
---         capabilities = capabilities,
---         other_fields = ...
---     })
--- end
--- require('ufo').setup()
--- require( ufo ).peekFoldedLinesUnderCursor()
+-- require("ufo").setup({
+--   provider_selector = function(bufnr, filetype, buftype)
+--     return { "treesitter", "indent" }
+--   end,
+-- })
 --
---
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-vim.o.foldcolumn = "0"
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
+-- -- Option 2: nvim lsp as LSP client
+-- -- Tell the server the capability of foldingRange,
+-- -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+-- -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- -- capabilities.textDocument.foldingRange = {
+-- --     dynamicRegistration = false,
+-- --     lineFoldingOnly = true
+-- -- }
+-- -- local language_servers = {} -- like {'gopls', 'clangd'}
+-- -- for _, ls in ipairs(language_servers) do
+-- --     require('lspconfig')[ls].setup({
+-- --         capabilities = capabilities,
+-- --         other_fields = ...
+-- --     })
+-- -- end
+-- -- require('ufo').setup()
+-- -- require( ufo ).peekFoldedLinesUnderCursor()
+-- --
+-- --
+-- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+-- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+-- vim.o.foldcolumn = "0"
+-- vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+-- vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
 -- opt.foldmethod = "expr"
@@ -275,7 +425,7 @@ require("nvim-treesitter.configs").setup({
   --  }
   context_commentstring = {
     enable = true,
-    enable_autocmd = false,
+    enable_autocmd = true,
   },
 })
 
@@ -288,9 +438,10 @@ require("nvim-treesitter.configs").setup({
 --
 --
 -- vim.opt.termguicolors = true
-vim.cmd([[highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d]])
+-- vim.cmd([[highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d]])
+-- vim.cmd([[highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40]])
+
 -- vim.cmd([[highlight IndentBlanklineIndent1 guifg=bg guibg=bg]])
-vim.cmd([[highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40]])
 -- vim.cmd([[highlight IndentBlanklineIndent2 guifg=bg guibg=bg]])
 -- vim.cmd([[highlight Visual gui=reverse]])
 -- vim.cmd([[highlight IndentBlanklineChar guifg=#4b526e ]])
@@ -312,6 +463,16 @@ require("indent_blankline").setup({
   },
   show_trailing_blankline_indent = false,
 })
+vim.g.indent_blankline_filetype_exclude = {
+  "help",
+  "startify",
+  "dashboard",
+  "packer",
+  "neogitstatus",
+  "NvimTree",
+  "neo-tree",
+  "Trouble",
+}
 -- require("Comment").setup()
 
 -- highlights
@@ -500,17 +661,40 @@ vim.cmd([[hi LineNr ctermfg=None]])
 --      }
 --  }
 --}
+local ivy = {
+  theme = "ivy",
+  hidden = true,
+  border = true,
+  -- borderchars = {"1", "2", "3", "4", "5", "6", "7", "8"},
+  prompt_title = "",
+  results_title = "",
+  preview_title = "",
+  prompt_prefix = "",
+  selection_caret = "",
+  entry_prefix = "",
+  multi_icon = "",
+  color_devicons = false,
+  preview = { msg_bg_fillchar = ' ' }
+}
 require("telescope").setup({
   defaults = {
     -- ...
   },
   pickers = {
-    find_files = {
-      theme = "ivy",
-      hidden = true,
-    },
+    find_files = ivy,
+    -- find_files = {
+    --   theme = "dropdown"
+    -- },
+    buffers = ivy,
+    live_grep = ivy,
+    harpoon = ivy,
+    marks = ivy,
   },
   extensions = {
+    harpoon = ivy,
+    Harpoon = ivy,
+    marks = ivy,
+    Marks = ivy
     -- ...
   },
 })
@@ -598,6 +782,14 @@ require("lspconfig")["lua_ls"].setup({
     }
   }
 })
+require 'lspconfig'.texlab.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+require 'lspconfig'.jsonls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
 -- vim.lsp.set_log_level("debug")
 vim.opt.completeopt:remove({ "preview" })
 
@@ -607,3 +799,17 @@ require 'usr.plugins.cmp'
 -- vim.api.nvim_create_autocmd({"BufRead"}, {
 -- callback = function() require'ufo'.closeAllFolds() end,
 -- })
+-- require('onedark').setup ({
+--   style = 'light',
+--   highlights = {
+--     IndentBlanklineContextChar = { fg = "$light_grey", fmt = "nocombine" },
+--     IndentBlanklineContextStart = { sp = "$light_grey", fmt = "nocombine,underline" },
+--   }
+-- })
+-- vim.cmd([[highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d]])
+-- vim.cmd([[highlight IndentBlanklineIndent1 guifg=bg guibg=bg]])
+-- vim.cmd([[highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40]])
+-- vim.cmd([[set background=light]])
+-- vim.cmd([[highlight IndentBlanklineIndent1 guifg=bg guibg=bg]])
+--
+-- require 'onedark'.load()

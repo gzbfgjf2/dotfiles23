@@ -23,4 +23,12 @@ function fish_prompt
     end
     # printf '↪ '
     set_color normal
+
+    # printf \n
+    # set_color normal
 end
+
+# function fish_prompt
+#     printf '$ '
+# end
+

@@ -1,0 +1,98 @@
+{
+  :main [
+    {
+      :des "common"
+      :rules [
+        [:##caps_lock :escape [ :!number]]
+        [:##quote :return_or_enter[ :!active :!l1]]
+        [:##open_bracket :delete_or_backspace[  :!active :!l1]]
+      ]
+    }
+    ; {
+    ;  :des "left-modifier"
+    ;  :rules [
+    ;   ; [:##2 ["mode-2" 1]]
+    ;   [:left_command ["mode-2" 1] nil {:afterup [{:set["mode-2" 0]}]}]
+    ;   [:##q :left_shift [:mode-2]]
+    ;   [:##a :left_shift [:mode-2]]
+    ;   [:##s :left_control [:mode-2]]
+    ;   [:##d :left_alt [:mode-2]]
+    ;   [:##f :left_command [:mode-2]]
+    ;
+    ;   [:##h :left_arrow [:mode-2]]
+    ;   [:##j :down_arrow [:mode-2]]
+    ;   [:##k :up_arrow [:mode-2]]
+    ;   [:##l :right_arrow [:mode-2]]
+    ;
+    ;   [:##o :return_or_enter [:mode-2]]
+    ;   [:##p :delete_or_backspace [:mode-2]]
+    ;  ]
+    ;  }
+    {
+     :des "left modifier, right number, layer 1"
+     :rules [
+      [:7 ["l1" 1]]
+      [:spacebar ["active" 1] [:l1] {:afterup [{:set["active" 0]} {:set["l1" 0]}]}]
+      [:##q :left_shift [ :l1 :active]]
+      [:##a :left_shift [ :l1 :active]]
+      [:##s :left_control [ :l1 :active]]
+      [:##d :left_alt [ :l1 :active]]
+      [:##f :left_command [ :l1 :active]]
+
+      [:##slash :1 [ :l1 :active]]
+      [:##period :2 [ :l1 :active]]
+      [:##comma :3 [ :l1 :active]]
+      [:##m :4 [ :l1 :active]]
+      [:##n :5 [ :l1 :active]]
+      [:##h :6 [ :l1 :active]]
+      [:##j :7 [ :l1 :active]]
+      [:##k :8 [ :l1 :active]]
+      [:##l :9 [ :l1 :active]]
+      [:##semicolon :0 [ :l1 :active]]
+      ; [:##quote :quote [ :l1 :active]]
+      [:##y :backslash [ :l1 :active]]
+      [:##u :hyphen [ :l1 :active]]
+      [:##i :equal_sign [ :l1 :active]]
+      [:##o :open_bracket [ :l1 :active]]
+      [:##p :close_bracket [ :l1 :active]]
+      [:##open_bracket :grave_accent_and_tilde [ :l1 :active]]
+      ; [:##p :quote :quote [ :l1 :active]]
+
+     ]
+     }
+    {
+     :des "left modifier, right navigation, layer 2"
+     :rules [
+      [:8 ["l2" 1]]
+      [:spacebar ["active" 1] [:l2] {:afterup [{:set["active" 0]} {:set["l2" 0]}]}]
+      [:##q :left_shift [ :l2 :active]]
+      [:##a :left_shift [ :l2 :active]]
+      [:##s :left_control [ :l2 :active]]
+      [:##d :left_alt [ :l2 :active]]
+      [:##f :left_command [ :l2 :active]]
+
+      [:##h :left_arrow [:l2 :active]]
+      [:##j :down_arrow [:l2 :active]]
+      [:##k :up_arrow [:l2 :active]]
+      [:##l :right_arrow [:l2 :active]]
+
+     ]
+     }
+    {
+     :des "right modifier, left quote~, layer 3"
+     :rules [
+      [:4 ["l3" 1]]
+      [:##spacebar ["active" 1] [:l3] {:afterup [{:set["active" 0]} {:set["l3" 0]}]}]
+      [:##p :right_shift [ :l3 :active]]
+      [:##semicolon :right_shift [ :l3 :active]]
+      [:##l :right_control [ :l3 :active]]
+      [:##k :right_alt [ :l3 :active]]
+      [:##j :right_command [ :l3 :active]]
+
+      [:##a :quote [ :l3 :active]]
+      [:##q :grave_accent_and_tilde [:l3 :active]]
+
+     ]
+     }
+  ]
+}

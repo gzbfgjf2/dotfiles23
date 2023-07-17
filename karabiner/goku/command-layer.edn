@@ -1,0 +1,82 @@
+{
+  :main [
+    {
+      :des "common"
+      :rules [
+        [:##caps_lock :escape [ :!number]]
+        [:##quote :return_or_enter[ :!right]]
+        [:##open_bracket :delete_or_backspace[ :!right]]
+      ]
+    }
+    ; {
+    ;  :des "left-modifier"
+    ;  :rules [
+    ;   ; [:##2 ["mode-2" 1]]
+    ;   [:left_command ["mode-2" 1] nil {:afterup [{:set["mode-2" 0]}]}]
+    ;   [:##q :left_shift [:mode-2]]
+    ;   [:##a :left_shift [:mode-2]]
+    ;   [:##s :left_control [:mode-2]]
+    ;   [:##d :left_alt [:mode-2]]
+    ;   [:##f :left_command [:mode-2]]
+    ;
+    ;   [:##h :left_arrow [:mode-2]]
+    ;   [:##j :down_arrow [:mode-2]]
+    ;   [:##k :up_arrow [:mode-2]]
+    ;   [:##l :right_arrow [:mode-2]]
+    ;
+    ;   [:##o :return_or_enter [:mode-2]]
+    ;   [:##p :delete_or_backspace [:mode-2]]
+    ;  ]
+    ;  }
+    {
+     :des "number"
+     :rules [
+      ; [:3 ["number" 1]]
+      [:left_command ["number" 1] nil {:afterup [ {:set["number" 0]}]}]
+      [:##q :left_shift [ :number]]
+      [:##caps_lock :left_shift [ :number]]
+      [:##a :left_control [ :number]]
+      [:##s :left_alt [ :number]]
+      [:##d :left_command [ :number]]
+
+      [:##slash :1 [ :number]]
+      [:##period :2 [ :number]]
+      [:##comma :3 [ :number]]
+      [:##m :4 [ :number]]
+      [:##n :5 [ :number]]
+      [:##h :6 [ :number]]
+      [:##j :7 [ :number]]
+      [:##k :8 [ :number]]
+      [:##l :9 [ :number]]
+      [:##semicolon :0 [ :number]]
+      [:##quote :grave_accent_and_tilde [ :number]]
+      [:##y :backslash [ :number]]
+      [:##u :hyphen [ :number]]
+      [:##i :equal_sign [ :number]]
+      [:##o :open_bracket [ :number]]
+      [:##p :close_bracket [ :number]]
+
+     ]
+     }
+    {
+     :des "right-modifier"
+     :rules [
+      ; [:##8 ["right" 1]]
+      ; [:##spacebar ["active" 1] [:right] {:afterup [{:set["active" 0]} {:set["right" 0]}]}]
+      [:right_command ["right" 1] nil {:afterup  {:set["right" 0]}}]
+      [:##p :right_shift [ :right]]
+      [:##quote :right_shift [ :right]]
+      [:##semicolon :right_control [ :right]]
+      [:##l :right_alt [ :right]]
+      [:##k :right_command [ :right]]
+
+      [:##w :quote [ :right]]
+      [:##a :left_arrow [:right]]
+      [:##d :down_arrow [:right]]
+      [:##s :up_arrow [:right]]
+      [:##f :right_arrow [:right]]
+
+     ]
+     }
+  ]
+}

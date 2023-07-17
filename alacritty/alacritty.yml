@@ -1,64 +1,50 @@
-font:
-  normal:
-    # family: Cascadia Mono
-    # family: SF mono
-    family: UbuntuMono
-    # family: Monospace
-    # family: Consolas
-    # family: Menlo
-    # family: FixedsysExcelsioriiib Nerd Font Mono
-    # family: Comic Mono
-    # family: InconsolataGo Nerd Font Mono
-    # family: UbuntuMono Nerd Font Mono
-    # style: Regular
-    style: Bold
-  
-  bold:
-    # family: 
-    # style: Regular
-    style: Bold
-  
-  size: 12
-  # size: 20
-  # size: 24
-
-
 window:
   gtk_theme_variant: light
-  gtk_theme_variant: dark
-  position:
-    x: 600
-    y: 200
-  padding:
-    x: 0
-    y: 0
   opacity: 1
-  dimensions:
-    lines: 50
-    columns: 80
-  decorations: full
-  # startup_mode: Fullscreen
-  startup_mode: Windowed
-  # startup_mode: Maximized
+  # decorations: full
+  # decorations: transparent
+  # decorations: buttonless
+  decorations: none
+  startup_mode: fullscreen
   dynamic_padding: true
+  padding:
+    x: 5
+    y: 1
+  option_as_alt: Both
 
+font:
+  size: 13
+  offset:
+    x: 1
+    y: 4
+  # use_thin_strokes: true
+
+  normal:
+    family: Fixedsys Excelsior 3.01
+    # family: Menlo
+    family: Hack
 # bell:
 #   command:
 #     program: paplay
 #     args: ["/usr/share/sounds/Yaru/stereo/bell.oga"]
-
+shell:
+  program: /opt/homebrew/bin/fish
 
 key_bindings:
   - { key: F11, action: ToggleFullscreen }
   - { key: N, mods: Control|Shift, action: SpawnNewInstance }
   # - { key: B,      mods: Control,       mode: Vi|~Search, action: ReceiveChar}
 
+# cursor:
+#   style:
+#     shape: Beam
 
 colors:
   # Default colors
   primary:
     background: '0x282c34'
     foreground: '0xabb2bf'
+    # foreground: "0xffffff"
 
     # Bright and dim foreground colors
     #
@@ -72,10 +58,11 @@ colors:
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
-  cursor:
+  # cursor:
   #  text: '0x000000'
   # cursor: '0xffffff'
-    cursor: '0x00ff00'
+    # cursor: '0x00ff00'
+    # cursor: '0x89c4f4'
 
   # Normal colors
   normal:
@@ -112,9 +99,36 @@ colors:
     magenta: '0xc678dd'
     cyan:    '0x56b6c2'
     white:   '0x828791'
-
+  # primary:
+  #   background: "0x000000"
+  #   # accent: "#00c2ff"
+  #   foreground: "0xffffff"
+  #   # background: '0x282c34'
+  #   # foreground: '0xabb2bf'
+  # normal:
+  #   black: "0x616161"
+  #   red: "0xff8272"
+  #   green: "0xb4fa72"
+  #   yellow: "0xfefdc2"
+  #   blue: "0xa5d5fe"
+  #   magenta: "0xff8ffd"
+  #   cyan: "0xd0d1fe"
+  #   white: "0xf1f1f1"
+  # bright:
+  #   black: "0x8e8e8e"
+  #   red: "0xffc4bd"
+  #   green: "0xd6fcb9"
+  #   yellow: "0xfefdd5"
+  #   blue: "0xc1e3fe"
+  #   magenta: "0xffb1fe"
+  #   cyan: "0xe5e6fe"
+  #   white: "0xfeffff"
   # Indexed Colors
   #
   # The indexed colors include all colors from 16 to 256.
   # When these are not set, they're filled with sensible defaults.
   #indexed_colors:
+
+# import:
+  # - ~/.config/alacritty/themes/themes/atom_one_light.yaml
+  # - ~/.config/alacritty/themes/themes/atom_one_dark.yaml

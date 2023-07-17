@@ -1,0 +1,158 @@
+{
+  :main [
+    {
+      :des "common"
+      :rules [
+        [:##caps_lock :left_control]
+        ; [:##caps_lock :escape]
+        ; [:##quote :return_or_enter[ :!number]]
+        ; [:##open_bracket :delete_or_backspace[ :!number]]
+      ]
+    }
+    {
+      :des "right modifier mode"
+      :rules [
+        [{:sim [:j :spacebar]  :simo {:afterup {:set ["right_modifier_mode" 0] } :upwhen :all }} [{:set ["right_modifier_mode" 1] }]]
+  [:##p :right_shift ["right_modifier_mode" 1]]
+        [:##o :right_control ["right_modifier_mode" 1]]
+        [:##i :right_alt ["right_modifier_mode" 1]]
+        [:##u :right_command ["right_modifier_mode" 1]]
+        [:##semicolon :right_shift ["right_modifier_mode" 1]]
+        [:##l :right_control ["right_modifier_mode" 1]]
+        [:##k :right_alt ["right_modifier_mode" 1]]
+        [:##j :right_command ["right_modifier_mode" 1]]
+      ]
+    }
+    {
+      :des "right navigation mode"
+      :rules [
+        [{:sim [:s :spacebar]  :simo {:afterup {:set ["right_navigation_mode" 0] } :upwhen :all }} [{:set ["right_navigation_mode" 1] }]]
+        [:##a :left_shift ["right_navigation_mode" 1]]
+        [:##s :left_control ["right_navigation_mode" 1]]
+        [:##d :left_alt ["right_navigation_mode" 1]]
+        [:##f :left_command ["right_navigation_mode" 1]]
+
+        [:##q :left_shift ["right_navigation_mode" 1]]
+        [:##w :left_control ["right_navigation_mode" 1]]
+        [:##e :left_alt ["right_navigation_mode" 1]]
+        [:##r :left_command ["right_navigation_mode" 1]]
+
+        [:##h :left_arrow ["right_navigation_mode" 1]]
+        [:##j :down_arrow ["right_navigation_mode" 1]]
+        [:##k :up_arrow ["right_navigation_mode" 1]]
+        [:##l :right_arrow ["right_navigation_mode" 1]]
+
+        ; [:##o :return_or_enter ["right_navigation_mode" 1]]
+        ; [:##p :delete_or_backspace ["right_navigation_mode" 1]]
+
+      ]
+    }
+    {
+     :des "left modifier, right number, layer 1"
+     :rules [
+        [{:sim [:f :spacebar]  :simo {:afterup {:set ["left_modifier" 0] } :upwhen :all }} [{:set ["left_modifier" 1] }]]
+      [:##q :left_shift [ :left_modifier]]
+      [:##a :left_shift [ :left_modifier]]
+      [:##s :left_control [ :left_modifier]]
+      [:##d :left_alt [ :left_modifier]]
+      [:##f :left_command [ :left_modifier]]
+    ]
+     }
+    {
+     :des "left modifier, right number, layer 1"
+     :rules [
+        [{:sim [:d :spacebar]  :simo {:afterup {:set ["number" 0] } :upwhen :all }} [{:set ["number" 1] }]]
+      [:##q :left_shift [ :number]]
+      [:##a :left_shift [ :number]]
+      [:##s :left_control [ :number]]
+      [:##d :left_alt [ :number]]
+      [:##f :left_command [ :number]]
+
+      [:##slash :1 [ :number]]
+      [:##period :2 [ :number]]
+      [:##comma :3 [ :number]]
+      [:##m :4 [ :number]]
+      [:##n :5 [ :number]]
+      [:##h :6 [ :number]]
+      [:##j :7 [ :number]]
+      [:##k :8 [ :number]]
+      [:##l :9 [ :number]]
+      [:##semicolon :0 [ :number]]
+      [:##y :backslash [ :number]]
+      [:##u :hyphen [ :number]]
+      [:##i :equal_sign [ :number]]
+      [:##o :open_bracket [ :number]]
+      [:##p :close_bracket [ :number]]
+      [:##open_bracket :grave_accent_and_tilde [ :number]]
+      ; [:##quote :quote [ :number]]
+
+     ]
+     }
+    ; {:des "simple delete return"
+    ;  :rules [
+    ;   [[:j :k ] :delete_or_backspace]
+    ;   [[:l :semicolon ] :return_or_enter]
+    ;   ]}
+    ; {
+    ;   :des "delete return mode"
+    ;   :rules [
+    ;     [{:sim [:l :spacebar]  :simo {:afterup {:set ["delete_return_mode" 0] } :upwhen :all }} [{:set ["delete_return_mode" 1] }]]
+    ;     [:a :left_shift ["delete_return_mode" 1]]
+    ;     [:s :left_control ["delete_return_mode" 1]]
+    ;     [:d :left_alt ["delete_return_mode" 1]]
+    ;     [:f :left_command ["delete_return_mode" 1]]
+    ;
+    ;     [:q :left_shift ["delete_return_mode" 1]]
+    ;     [:w :left_control ["delete_return_mode" 1]]
+    ;     [:e :left_alt ["delete_return_mode" 1]]
+    ;
+    ;     [:##h :delete_or_backspace ["delete_return_mode" 1]]
+    ;     [:##j :return_or_enter ["delete_return_mode" 1]]
+    ;
+    ;   ]
+    ; }
+
+    ; {
+    ;   :des "choose layer"
+    ;   :rules [
+    ;     [:caps_lock ["mode" 1] ]
+    ;     [{:type "basic" :from {:key_code "tab"} :to [{ :set_variable {:name "mode" :value 0}}] :conditions [{:name "mode" :value 0 :type "variable_unless"}]}]
+    ;   ]
+    ; }
+    ; {
+    ;   :des "f layer, left abc + right modifiers"
+    ;   :rules [
+    ;     [:##f ["mode" 2] ["mode" 1]]
+    ;     [:##j :right_command ["mode" 2]]
+    ;     [:##k :right_alt ["mode" 2]]
+    ;     [:##l :right_control ["mode" 2]]
+    ;     [:semicolon :right_shift ["mode" 2]]
+    ;   ]
+    ; }
+    ; {
+    ;   :des "j layer, right abc + left modifiers"
+    ;   :rules [
+    ;     [:##j ["mode" 3] ["mode" 1]]
+    ;     [:##f :left_command ["mode" 3]]
+    ;     [:##d :left_alt ["mode" 3]]
+    ;     [:##s :left_control ["mode" 3]]
+    ;     [:##a :left_shift ["mode" 3]]
+    ;   ]
+    ; }
+    ; {
+    ;   :des "k layer, right navigation + left modifiers"
+    ;   :rules [
+    ;     [:##j ["mode" 4] ["mode" 1]]
+    ;     [:##f :left_command ["mode" 4]]
+    ;     [:##d :left_alt ["mode" 4]]
+    ;     [:##s :left_control ["mode" 4]]
+    ;     [:##a :left_shift ["mode" 4]]
+    ;     
+    ;     [:##h :left_arrow ["mode" 4]]
+    ;     [:##j :`` ["mode" 4]]
+    ;     [:##l :right_control ["mode" 4]]
+    ;     [:##semicolon :right_shift ["mode" 4]]
+    ;   ]
+    ; }
+  ]
+}
