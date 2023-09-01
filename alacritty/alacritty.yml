@@ -15,9 +15,11 @@ window:
 font:
   size: 13
   offset:
-    x: 1
-    y: 4
+    x: 0
+    y: 3
   # use_thin_strokes: true
+  # defaults write -g AppleFontSmoothing -int 0
+  # https://github.com/alacritty/alacritty/issues/4616
 
   normal:
     family: Fixedsys Excelsior 3.01
@@ -33,6 +35,7 @@ shell:
 key_bindings:
   - { key: F11, action: ToggleFullscreen }
   - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: Slash,   mods: Control,       chars: "\x1f"}
   # - { key: B,      mods: Control,       mode: Vi|~Search, action: ReceiveChar}
 
 # cursor:

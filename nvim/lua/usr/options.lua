@@ -4,6 +4,7 @@ vim.o.termguicolors = true
 -- vim.o.relativenumber = true
 vim.o.cmdheight = 0
 vim.o.laststatus = 0
+-- vim.o.laststatus = 2
 vim.o.syntax = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
@@ -11,6 +12,7 @@ vim.o.expandtab = true
 vim.o.autoindent = true
 vim.o.splitright = true
 vim.o.signcolumn = "no"
+vim.o.pumblend = 15
 -- vim.o.tw = 79
 -- vim.o.nuw = 1
 vim.o.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
@@ -40,7 +42,7 @@ vim.cmd 'filetype plugin indent on'
 --             nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
 --             nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
 --             nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
---             
+--
 --             nnoremap gk :<C-u>call VSCodeCall('cursorMove', { 'to': 'up', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
 --             nnoremap gj :<C-u>call VSCodeCall('cursorMove', { 'to': 'down', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
 --             function! MoveCursor(direction) abort
@@ -50,7 +52,7 @@ vim.cmd 'filetype plugin indent on'
 --                     return a:direction
 --                 endif
 --             endfunction
---             
+--
 --             nmap <expr> j MoveCursor('j')
 --             nmap <expr> k MoveCursor('k')
 --         endif
@@ -67,21 +69,21 @@ vim.cmd 'filetype plugin indent on'
 --             nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
 --         endif
 -- ]])
---create cmd
--- https://www.reddit.com/r/neovim/comments/vemydn/my_command_for_full_screen_interactive_terminal/u/funbike
-vim.cmd([[
-  command! -nargs=? Terminal call Term(<q-args>)
-]])
 vim.cmd([[
   cabbrev h vert h <C-R>=Eatchar('\s')<CR>
 ]])
 
 
+--create cmd
+-- https://www.reddit.com/r/neovim/comments/vemydn/my_command_for_full_screen_interactive_terminal/u/funbike
+vim.cmd([[
+  command! -nargs=? Terminal call Term(<q-args>)
+]])
 -- create functions
 vim.cmd([[
   function! Term(args)
     if has('nvim')
-      " tabnew
+      tabnew
       execute 'terminal ' . a:args
       " execute 'terminal'
       " execute a:args
@@ -121,22 +123,41 @@ if has("persistent_undo")
 endif
 ]])
 -- autocmd
+-- https://stackoverflow.com/questions/6726783/how-to-change-the-default-position-of-quickfix-window-in-vim
+vim.cmd [[autocmd FileType qf wincmd L]]
+-- https://neovim.discourse.group/t/how-to-automatically-close-the-split-window-after-selecting-the-option-from-the-reference-list/2953
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "javascript", "html", "css" },
-  command = "setlocal shiftwidth=2 tabstop=2",
+  callback = function()
+    local bufnr = vim.fn.bufnr('%')
+    vim.keymap.set("n", "e", function()
+      vim.api.nvim_command([[execute "normal! \<cr>"]])
+      vim.api.nvim_command(bufnr .. 'bd')
+    end, { buffer = bufnr })
+  end,
+  pattern = "qf",
+})
+-- vim.cmd("autocmd FileType qf ++once call nvim_input(':cclose<cr>')")
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "javascript", "javascriptreact", "typescriptreact", "html", "css",
+    "typescript", "json", "jsonc" },
+  command = "setlocal shiftwidth=2 tabstop=2 ts=2 sts=2 sw=2 expandtab",
 })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "yaml" },
   command = "setlocal ts=2 sts=2 sw=2 expandtab",
 })
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "tex" },
+  command = "setlocal ts=2 sts=2 sw=2 expandtab textwidth=79",
+})
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "lua" },
   command = "setlocal ts=2 sts=2 sw=2 expandtab",
 })
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "tex"},
-  command = "set spell",
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "tex"},
+--   command = "set spell",
+-- })
 vim.cmd([[
   augroup Python
     autocmd!
@@ -179,23 +200,35 @@ vim.keymap.set('n', '<BS>', ':', { noremap = true })
 -- vim.keymap.set('v', ';', ':', { noremap = true })
 -- vim.keymap.set('n', ':', ';', { noremap = true })
 -- vim.keymap.set('v', ':', ';', { noremap = true })
-vim.keymap.set('n', '<c-s>', ':w<cr>', {noremap = true})
+vim.keymap.set('n', '<c-s>', ':w<cr>', { noremap = true })
 
 vim.keymap.set('n', '<leader>undo', vim.cmd.UndotreeToggle)
-vim.keymap.set('n', "<Leader>ecfv", ":e ~/.config/nvim/plugin/config.vim<Enter>", { noremap = true })
-vim.keymap.set('n', "<Leader>scfv", ":so ~/.config/nvim/plugin/config.vim<Enter>", { noremap = true })
-vim.keymap.set('n', "<Leader>einl", ":e ~/.config/nvim/init.lua<Enter>", { noremap = true })
-vim.keymap.set('n', "<Leader>eluf", ":e ~/.config/nvim/lua/usr<Enter>", { noremap = true })
-vim.keymap.set('n', "<Leader>sinl", ":luafile ~/.config/nvim/init.lua<Enter>", { noremap = true })
-vim.keymap.set('n', "<Leader>ealy", ":e ~/.config/alacritty/alacritty.yml<Enter>", { noremap = true })
-vim.keymap.set('n', "<Leader>etdt", ":e ~/.todo/todo.txt<Enter>", { noremap = true })
-vim.keymap.set('n', "<Leader>ecff", ":e ~/.config/fish/config.fish<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>ecfv", ":e ~/.config/nvim/plugin/config.vim<Enter>",
+  { noremap = true })
+vim.keymap.set('n', "<Leader>scfv",
+  ":so ~/.config/nvim/plugin/config.vim<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>einl", ":e ~/.config/nvim/init.lua<Enter>",
+  { noremap = true })
+vim.keymap.set('n', "<Leader>eluf", ":e ~/.config/nvim/lua/usr<Enter>",
+  { noremap = true })
+vim.keymap.set('n', "<Leader>sinl", ":luafile ~/.config/nvim/init.lua<Enter>",
+  { noremap = true })
+vim.keymap.set('n', "<Leader>ealy",
+  ":e ~/.config/alacritty/alacritty.yml<Enter>", { noremap = true })
+vim.keymap.set('n', "<Leader>etdt", ":e ~/.todo/todo.txt<Enter>",
+  { noremap = true })
+vim.keymap.set('n', "<Leader>ecff", ":e ~/.config/fish/config.fish<Enter>",
+  { noremap = true })
 vim.keymap.set('t', "<Esc>", "<C-\\><C-n>l", { noremap = true })
 vim.keymap.set('n', "<Leader>i", "dd<up>o", { noremap = true })
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true })
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true })
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>",
+  { noremap = true })
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",
+  { noremap = true })
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>",
+  { noremap = true })
+vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>",
+  { noremap = true })
 -- vim.keymap.set("n", "<c-d>", "<c-d>zz0", { noremap = true })
 -- vim.keymap.set("n", "<c-u>", "<c-u>zz0", { noremap = true })
 -- vim.keymap.set("n", "<c-f>", "<c-f>zz0", { noremap = true })
@@ -241,26 +274,53 @@ vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "fg" })
 -- vim.api.nvim_set_hl(0, 'Cursor', { reverse = true })
 -- vim.api.nvim_set_hl(0, 'EndofBuffer', { fg = "#5c6370" })
 vim.api.nvim_set_hl(0, 'EndofBuffer', { fg = "bg" })
-vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true})
-vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true})
+vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true })
+vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineIndent1', { bg = "lightgrey" })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineIndent1', { bg = "lightgrey" })
 --
-  -- hi link StatusLine VertSplit
-  -- hi link StatusLineNC VertSplit
-vim.cmd([[hi StatusLine guibg=guibg guifg=#3b3f4c]])
-vim.cmd([[hi StatusLineNC guibg=guibg guifg=#3b3f4c]])
-vim.cmd([[
-  set statusline=%{repeat('─',winwidth('.'))}
-]])
+-- hi link StatusLine VertSplit
+-- hi link StatusLineNC VertSplit
+-- vim.cmd([[hi StatusLine guibg=guibg guifg=#3b3f4c]])
+-- vim.cmd([[hi StatusLineNC guibg=guibg guifg=#3b3f4c]])
 
-  -- " set laststatus=0
-  -- set statusline=%{repeat('─',winwidth('.'))}
+-- vim.cmd([[
+--   set statusline=%{repeat('─',winwidth('.'))}
+-- ]])
+-- set statusline=%{repeat('─',winwidth('.'))}
+
+-- vim.cmd([[hi TelescopeNormal guibg=#31353f]])
+-- vim.cmd([[hi TelescopePreviewNormal guibg=#302835]])
+-- vim.cmd([[hi TelescopeNormal guibg=#331D2C]])
+-- vim.cmd([[hi TelescopePreviewNormal guibg=#3F2E3E]])
+
+-- vim.cmd([[hi TelescopeNormal guibg=#303841]])
+-- vim.cmd([[hi TelescopePreviewNormal guibg=#3A4750]])
+
+-- vim.cmd([[hi TelescopeNormal guibg=#222831]])
+-- vim.cmd([[hi TelescopePromptNormal guibg=#FFD369]])
+-- vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
+
+-- vim.cmd([[hi MsgArea guibg=#1E313B]])
+-- vim.cmd([[hi MsgArea guibg=#1E293B]])
+-- vim.cmd([[hi MsgArea guibg=#475569]])
+vim.cmd([[hi TelescopeNormal guibg=#4C566A]])
+vim.cmd([[hi TelescopePromptNormal guibg=#3B4252]])
+-- vim.cmd([[hi TelescopePromptNormal guibg=#475569]])
+vim.cmd([[hi TelescopePromptNormal  guibg=#393f4a]])
+vim.cmd([[hi TelescopePreviewNormal guibg=#2E3440]])
+-- vim.cmd([[hi link NoiceCmdlinePopup NormalFloat]])
+vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
+-- vim.cmd([[hi NoiceCmdlinePopup guibg=white]])
+-- vim.cmd([[hi vertsplit guibg=grey guifg=#3b3f4c]])
+-- vim.cmd([[hi vertsplit guibg=#393fb1 guifg=#3b3f4c]])
+vim.cmd([[hi VertSplit guibg=#abb2bf guifg=#3b3f4c]])
 vim.opt.fillchars = {
   eob = " ",
   fold = " ",
-  stlnc = "─",
-  stl = "─",
+  vert = "|",
+  -- stlnc = "─",
+  -- stl = "─",
   -- stl = "",
   -- stl = "─",
   -- stl = "─",
@@ -271,4 +331,50 @@ vim.opt.fillchars = {
 -- vim.api.nvim_set_hl(0, 'StatusLine', { bg = "bg", fg="#3b3f4c"})
 -- vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = "bg", fg="#3b3f4c"})
 
-  -- hi link StatusLineNC VertSplit
+-- hi link StatusLineNC VertSplit
+
+
+if vim.g.neovide then
+  vim.o.guifont = "Hack"
+  vim.opt.linespace = 1
+  vim.g.transparency = 0.5
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_refresh_rate = 100
+  vim.g.neovide_cursor_animation_length = 0
+end
+
+
+-- Slightly modified from :h setting-tabline:
+vim.cmd([[
+function! MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T'
+
+    " the label is made by MyTabLabel()
+    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+
+  return s
+endfunction
+
+function! MyTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  return bufname(buflist[winnr - 1])
+endfunction
+
+set tabline=%!MyTabLine()
+]])
