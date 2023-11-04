@@ -194,9 +194,9 @@ vim.cmd([[autocmd InsertLeave * :normal `^]])
 vim.cmd([[
   augroup custom_highlight
     autocmd!
-    au ColorScheme onedark highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d
-    au ColorScheme onedark highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40
-    au ColorScheme onedark hi VertSplit guibg=#abb2bf guifg=#3b3f4c
+    " au ColorScheme onedark highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d
+    " au ColorScheme onedark highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40
+    " au ColorScheme onedark hi VertSplit guibg=#abb2bf guifg=#3b3f4c
     " au ColorScheme onedark hi CurSearch guibg=#abcabc guifg=#aaabbb
     " au ColorScheme onedark hi CurSearch guifg=#CCF381 guibg=#4831D4
     au ColorScheme onedark hi CurSearch guifg=#4831D4 guibg=#CCF381
@@ -310,33 +310,10 @@ vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true })
 -- ]])
 -- set statusline=%{repeat('─',winwidth('.'))}
 
--- vim.cmd([[hi TelescopeNormal guibg=#31353f]])
--- vim.cmd([[hi TelescopePreviewNormal guibg=#302835]])
--- vim.cmd([[hi TelescopeNormal guibg=#331D2C]])
--- vim.cmd([[hi TelescopePreviewNormal guibg=#3F2E3E]])
-
--- vim.cmd([[hi TelescopeNormal guibg=#303841]])
--- vim.cmd([[hi TelescopePreviewNormal guibg=#3A4750]])
-
--- vim.cmd([[hi TelescopeNormal guibg=#222831]])
--- vim.cmd([[hi TelescopePromptNormal guibg=#FFD369]])
--- vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
-
--- vim.cmd([[hi MsgArea guibg=#1E313B]])
--- vim.cmd([[hi MsgArea guibg=#1E293B]])
--- vim.cmd([[hi MsgArea guibg=#475569]])
-vim.cmd([[hi TelescopeNormal guibg=#4C566A]])
-vim.cmd([[hi TelescopePromptNormal guibg=#3B4252]])
--- vim.cmd([[hi TelescopePromptNormal guibg=#475569]])
-vim.cmd([[hi TelescopePromptNormal  guibg=#393f4a]])
-vim.cmd([[hi TelescopePreviewNormal guibg=#2E3440]])
--- vim.cmd([[hi link NoiceCmdlinePopup NormalFloat]])
-vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
--- vim.cmd([[hi NoiceCmdlinePopup guibg=white]])
 vim.opt.fillchars = {
   eob = " ",
   fold = " ",
-  vert = "|",
+  -- vert = "|",
   -- stlnc = "─",
   -- stl = "─",
   -- stl = "",

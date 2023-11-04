@@ -1,46 +1,30 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("usr.plugins")
-
 require "usr.options"
-vim.cmd [[colorscheme morning]]
---
---local ensure_packer = function()
---  local fn = vim.fn
---  local install_path = fn.stdpath('data') ..
---      '/site/pack/packer/start/packer.nvim'
---  if fn.empty(fn.glob(install_path)) > 0 then
---    fn.system({
---      'git', 'clone', '--depth', '1',
---      'https://github.com/wbthomason/packer.nvim', install_path
---    })
---    vim.cmd [[packadd packer.nvim]]
---    return true
---  end
---  return false
---end
---
---
---local packer_sync = function()
---  local packer_bootstrap = ensure_packer()
---  if packer_bootstrap then
---    require('packer').sync()
---  end
---end
---
---
----- local treesitter = require('usr.plugins.treesitter')
---ensure_packer()
+
+local lazy_opt = {
+  change_detection = {
+    -- automatically check for config file changes and reload the ui
+    enabled = false,
+    notify = false, -- get a notification when changes are found
+  }
+}
+local lazy = function()
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable",
+      lazypath,
+    })
+  end
+  vim.opt.rtp:prepend(lazypath)
+  require("lazy").setup("usr.plugins", lazy_opt)
+end
+
+lazy()
+-- vim.cmd [[colorscheme onedark]]
 --
 --local nvim_surround_ops = {
 --  "kylechui/nvim-surround",
@@ -114,7 +98,6 @@ vim.cmd [[colorscheme morning]]
 --  -- use "vimjas/vim-python-pep8-indent"
 --  use "neovim/nvim-lspconfig"
 --  use "dag/vim-fish"
---  use "lukas-reineke/indent-blankline.nvim"
 --  use {
 --    "williamboman/mason.nvim",
 --    config = function()
@@ -143,14 +126,6 @@ vim.cmd [[colorscheme morning]]
 --  --     vim.g.vimtex_syntax_enabled = 0
 --  --   end
 --  -- }
---  use { "numToStr/Comment.nvim",
---    config = function()
---      require('Comment').setup {
---        pre_hook = require('ts_context_commentstring.integrations.comment_nvim')
---            .create_pre_hook(),
---      }
---    end,
---  }
 --  use { "navarasu/onedark.nvim",
 --    config = function()
 --      require('onedark').setup {
@@ -174,7 +149,6 @@ vim.cmd [[colorscheme morning]]
 --  --   config = function()
 --  --     require('leap').add_default_mappings()
 --  --   end, }
---  use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
 --  -- use 'junegunn/goyo.vim'
 --  -- use { 'lewis6991/gitsigns.nvim' }
 --  -- use 'folke/tokyonight.nvim'
@@ -387,7 +361,6 @@ vim.cmd [[colorscheme morning]]
 --    end,
 --    requires = { "nvim-lua/plenary.nvim" },
 --  }
---  use "JoosepAlviste/nvim-ts-context-commentstring"
 --  -- use { 'echasnovski/mini.starter',
 --  --   config = function()
 --  --     local starter = require('mini.starter')
@@ -624,52 +597,6 @@ vim.cmd [[colorscheme morning]]
 ---- vim.cmd([[highlight Visual gui=reverse]])
 ---- vim.cmd([[highlight IndentBlanklineChar guifg=#4b526e ]])
 ---- vim.cmd [[highlight Normal guibg=#131313]]
---require("indent_blankline").setup({
---  space_char_blankline = " ",
---  show_current_context = false,
---  -- show_current_context_space = true,
---  -- show_current_context_start = false,
---  -- show_first_indent_level = false,
---  char = " ",
---  char_highlight_list = {
---    "IndentBlanklineIndent1",
---    "IndentBlanklineIndent2",
---  },
---  space_char_highlight_list = {
---    "IndentBlanklineIndent1",
---    "IndentBlanklineIndent2",
---  },
---  show_trailing_blankline_indent = false,
---})
---vim.g.indent_blankline_filetype_exclude = {
---  "help",
---  "startify",
---  "dashboard",
---  "packer",
---  "neogitstatus",
---  "NvimTree",
---  "neo-tree",
---  "Trouble",
---}
---for _, keymap in pairs({
---  'zo',
---  'zO',
---  'zc',
---  'zC',
---  'za',
---  'zA',
---  'zv',
---  'zx',
---  'zX',
---  'zm',
---  'zM',
---  'zr',
---  'zR',
---}) do
---  vim.api.nvim_set_keymap('n', keymap,
---    keymap .. '<CMD>IndentBlanklineRefresh<CR>',
---    { noremap = true, silent = true })
---end
 -----------------
 --
 ---- require("Comment").setup()
@@ -1061,30 +988,6 @@ vim.cmd [[colorscheme morning]]
 --local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
 --  .protocol.make_client_capabilities())
 --
----- ufo
---local zr_refresh = function()
---  require("ufo").openAllFolds()
---  require('indent_blankline').refresh()
---end
---local zm_refresh = function()
---  require("ufo").closeAllFolds()
---  require('indent_blankline').refresh()
---end
---capabilities.textDocument.foldingRange = {
---  dynamicRegistration = false,
---  lineFoldingOnly = true
---}
---vim.cmd([[autocmd BufReadPost, fileReadPost * normal zR]])
---vim.o.foldcolumn = "0"
---vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
---vim.o.foldlevelstart = 99
---vim.o.foldenable = true
----- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
----- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
---vim.keymap.set("n", "zR", zr_refresh)
---vim.keymap.set("n", "zM", zm_refresh)
---require('ufo').setup()
-----
 --
 --
 --require("lspconfig")["pyright"].setup {
