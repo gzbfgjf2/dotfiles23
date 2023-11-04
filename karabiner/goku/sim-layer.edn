@@ -3,8 +3,8 @@
     {
       :des "common"
       :rules [
-        [:##caps_lock :left_control]
-        ; [:##caps_lock :escape]
+        ; [:##caps_lock :left_control]
+        [:##caps_lock :escape]
         ; [:##quote :return_or_enter[ :!number]]
         ; [:##open_bracket :delete_or_backspace[ :!number]]
       ]
@@ -13,13 +13,16 @@
       :des "right modifier mode"
       :rules [
         [{:sim [:j :spacebar]  :simo {:afterup {:set ["right_modifier_mode" 0] } :upwhen :all }} [{:set ["right_modifier_mode" 1] }]]
-  [:##p :right_shift ["right_modifier_mode" 1]]
-        [:##o :right_control ["right_modifier_mode" 1]]
-        [:##i :right_alt ["right_modifier_mode" 1]]
-        [:##u :right_command ["right_modifier_mode" 1]]
+        [{:sim [:u :spacebar]  :simo {:afterup {:set ["right_modifier_mode" 0] } :upwhen :all }} [{:set ["right_modifier_mode" 1] }]]
+        [:##p :right_shift ["right_modifier_mode" 1]]
         [:##semicolon :right_shift ["right_modifier_mode" 1]]
+        [:##o :right_control ["right_modifier_mode" 1]]
         [:##l :right_control ["right_modifier_mode" 1]]
+        [:##9 :right_control ["right_modifier_mode" 1]]
+        [:##i :right_alt ["right_modifier_mode" 1]]
         [:##k :right_alt ["right_modifier_mode" 1]]
+        [:##8 :right_alt ["right_modifier_mode" 1]]
+        [:##u :right_command ["right_modifier_mode" 1]]
         [:##j :right_command ["right_modifier_mode" 1]]
       ]
     }
@@ -27,6 +30,7 @@
       :des "right navigation mode"
       :rules [
         [{:sim [:s :spacebar]  :simo {:afterup {:set ["right_navigation_mode" 0] } :upwhen :all }} [{:set ["right_navigation_mode" 1] }]]
+        [{:sim [:w :spacebar]  :simo {:afterup {:set ["right_navigation_mode" 0] } :upwhen :all }} [{:set ["right_navigation_mode" 1] }]]
         [:##a :left_shift ["right_navigation_mode" 1]]
         [:##s :left_control ["right_navigation_mode" 1]]
         [:##d :left_alt ["right_navigation_mode" 1]]
@@ -51,22 +55,32 @@
      :des "left modifier, right number, layer 1"
      :rules [
         [{:sim [:f :spacebar]  :simo {:afterup {:set ["left_modifier" 0] } :upwhen :all }} [{:set ["left_modifier" 1] }]]
+        [{:sim [:r :spacebar]  :simo {:afterup {:set ["left_modifier" 0] } :upwhen :all }} [{:set ["left_modifier" 1] }]]
       [:##q :left_shift [ :left_modifier]]
       [:##a :left_shift [ :left_modifier]]
       [:##s :left_control [ :left_modifier]]
+      [:##w :left_control [ :left_modifier]]
+      [:##2 :left_control [ :left_modifier]]
       [:##d :left_alt [ :left_modifier]]
+      [:##e :left_alt [ :left_modifier]]
+      [:##3 :left_alt [ :left_modifier]]
       [:##f :left_command [ :left_modifier]]
+      [:##r :left_command [ :left_modifier]]
     ]
      }
     {
      :des "left modifier, right number, layer 1"
      :rules [
         [{:sim [:d :spacebar]  :simo {:afterup {:set ["number" 0] } :upwhen :all }} [{:set ["number" 1] }]]
+        [{:sim [:e :spacebar]  :simo {:afterup {:set ["number" 0] } :upwhen :all }} [{:set ["number" 1] }]]
       [:##q :left_shift [ :number]]
       [:##a :left_shift [ :number]]
       [:##s :left_control [ :number]]
+      [:##w :left_control [ :number]]
       [:##d :left_alt [ :number]]
+      [:##e :left_alt [ :number]]
       [:##f :left_command [ :number]]
+      [:##r :left_command [ :number]]
 
       [:##slash :1 [ :number]]
       [:##period :2 [ :number]]

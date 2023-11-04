@@ -1,7 +1,7 @@
 -- options
 vim.o.termguicolors = true
--- vim.o.number = true
--- vim.o.relativenumber = true
+vim.o.number = true
+vim.o.relativenumber = true
 vim.o.cmdheight = 0
 vim.o.laststatus = 0
 -- vim.o.laststatus = 2
@@ -21,6 +21,8 @@ vim.o.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
 vim.o.so = 999
 vim.o.ve = "onemore"
 -- vim.o.showmode= false
+
+vim.o.showtabline = false
 
 
 vim.o.shell = "fish"
@@ -69,6 +71,7 @@ vim.cmd 'filetype plugin indent on'
 --             nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
 --         endif
 -- ]])
+
 vim.cmd([[
   cabbrev h vert h <C-R>=Eatchar('\s')<CR>
 ]])
@@ -151,8 +154,12 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal ts=2 sts=2 sw=2 expandtab textwidth=79",
 })
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "plaintex" },
+  command = "setlocal ts=2 sts=2 sw=2 expandtab textwidth=79",
+})
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "lua" },
-  command = "setlocal ts=2 sts=2 sw=2 expandtab",
+  command = "setlocal ts=2 sts=2 sw=2 expandtab textwidth=79",
 })
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = { "tex"},
@@ -187,24 +194,36 @@ vim.cmd([[autocmd InsertLeave * :normal `^]])
 vim.cmd([[
   augroup custom_highlight
     autocmd!
-    au ColorScheme * highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d
-    au ColorScheme * highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40
+    au ColorScheme onedark highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d
+    au ColorScheme onedark highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40
+    au ColorScheme onedark hi VertSplit guibg=#abb2bf guifg=#3b3f4c
+    " au ColorScheme onedark hi CurSearch guibg=#abcabc guifg=#aaabbb
+    " au ColorScheme onedark hi CurSearch guifg=#CCF381 guibg=#4831D4
+    au ColorScheme onedark hi CurSearch guifg=#4831D4 guibg=#CCF381
+    " au ColorScheme catpucin-latte highlight IndentBlanklineIndent2 guifg=245 guibg=120
+    " au ColorScheme catpucin-latte highlight IndentBlanklineIndent2 guifg=100 guibg=120
   augroup END
 ]])
-vim.cmd([[color onedark]])
+-- " hi vertsplit guibg=grey guifg=#3b3f4c]
+-- " hi vertsplit guibg=#393fb1 guifg=#3b3f4c
+-- vim.cmd([[color onedark]])
 -- keymaps
 -- vim.keymap.set('n', '<tab>', '<ESC>', { noremap = true })
+-- vim.keymap.set("i", "jk", "<ESC>", { noremap = true })
 -- vim.keymap.set('n', '<tab>', ':', { noremap = true })
--- vim.keymap.set('n', ';', ':', { noremap = true })
-vim.keymap.set('n', '<BS>', ':', { noremap = true })
--- vim.keymap.set('v', ';', ':', { noremap = true })
+vim.keymap.set('n', ';', ':', { noremap = true })
+-- vim.keymap.set('n', '<BS>', ':', { noremap = true })
+vim.keymap.set('v', ';', ':', { noremap = true })
 -- vim.keymap.set('n', ':', ';', { noremap = true })
 -- vim.keymap.set('v', ':', ';', { noremap = true })
 vim.keymap.set('n', '<c-s>', ':w<cr>', { noremap = true })
 
 vim.keymap.set('n', '<leader>undo', vim.cmd.UndotreeToggle)
-vim.keymap.set('n', "<Leader>ecfv", ":e ~/.config/nvim/plugin/config.vim<Enter>",
-  { noremap = true })
+vim.keymap.set(
+  'n',
+  "<Leader>ecfv", ":e ~/.config/nvim/plugin/config.vim<Enter>",
+  { noremap = true }
+)
 vim.keymap.set('n', "<Leader>scfv",
   ":so ~/.config/nvim/plugin/config.vim<Enter>", { noremap = true })
 vim.keymap.set('n', "<Leader>einl", ":e ~/.config/nvim/init.lua<Enter>",
@@ -266,14 +285,16 @@ vim.keymap.set("v", "y", "ygv<Esc>", { noremap = true })
 -- vim.keymap.set("v", ";", "<Right>", { noremap = true })
 
 -- hightlight
+--- important
+--- vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "fg" })
+--- vim.api.nvim_set_hl(0, 'EndofBuffer', { fg = "bg" })
+--- important
 -- vim.api.nvim_set_hl(0, 'StatusLine', { bg = "bg" })
 -- vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = "bg" })
-vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "fg" })
 -- vim.api.nvim_set_hl(0, 'Comment', { gui = false })
 -- vim.api.nvim_set_hl(0, 'Error', { fg = "#ffffff", undercurl = true })
 -- vim.api.nvim_set_hl(0, 'Cursor', { reverse = true })
 -- vim.api.nvim_set_hl(0, 'EndofBuffer', { fg = "#5c6370" })
-vim.api.nvim_set_hl(0, 'EndofBuffer', { fg = "bg" })
 vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true })
 vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true })
 -- vim.api.nvim_set_hl(0, 'IndentBlanklineIndent1', { bg = "lightgrey" })
@@ -312,9 +333,6 @@ vim.cmd([[hi TelescopePreviewNormal guibg=#2E3440]])
 -- vim.cmd([[hi link NoiceCmdlinePopup NormalFloat]])
 vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
 -- vim.cmd([[hi NoiceCmdlinePopup guibg=white]])
--- vim.cmd([[hi vertsplit guibg=grey guifg=#3b3f4c]])
--- vim.cmd([[hi vertsplit guibg=#393fb1 guifg=#3b3f4c]])
-vim.cmd([[hi VertSplit guibg=#abb2bf guifg=#3b3f4c]])
 vim.opt.fillchars = {
   eob = " ",
   fold = " ",
@@ -376,5 +394,5 @@ function! MyTabLabel(n)
   return bufname(buflist[winnr - 1])
 endfunction
 
-set tabline=%!MyTabLine()
+" set tabline=%!MyTabLine()
 ]])

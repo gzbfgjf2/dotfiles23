@@ -7,9 +7,12 @@ set -g fish_greeting
 # set -g fish_color_valid_path 
 
 # pyenv
+# potentially https://www.reddit.com/r/neovim/comments/ga0s7w/use_python_venv_with_neovim/
 if set -q SHLVL; and test $SHLVL -eq 1
+    # fish_add_path /opt/homebrew/bin
     eval "$(/opt/homebrew/bin/brew shellenv)"
     pyenv init - | source
+    set -gx PATH ~/.local/share/nvm/$nvm_default_version/bin $PATH
 end
 
 . ~/app/google-cloud-sdk/path.fish.inc

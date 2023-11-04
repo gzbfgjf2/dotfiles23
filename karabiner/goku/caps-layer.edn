@@ -1,0 +1,32 @@
+{
+  :main [
+    {
+      :des "common"
+      :rules [
+        [:##caps_lock ["mode" 1]]
+        [:##spacebar ["mode" 0] ["mode" 1]]
+        [:##tab ["mode" 0] ["mode" 1]]
+      ]
+    }
+    {
+     :des "left-modifier"
+     :rules [
+      [:##f ["mode" 2] ["mode" 1]]
+      [:##a :left_shift ["mode" 2]]
+      [:##s :left_control ["mode" 2]]
+      [:##d :left_alt ["mode" 2]]
+      [:##f :left_command ["mode" 2]]
+     ]
+    }
+    {
+     :des "right-modifier"
+     :rules [
+      [:##j ["mode" 3] ["mode" 1]]
+      [:##semicolon :right_shift ["mode" 3]]
+      [:##l :right_control ["mode" 3]]
+      [:##k :right_alt ["mode" 3]]
+      [:##j :right_command ["mode" 3]]
+     ]
+    }
+  ]
+}
