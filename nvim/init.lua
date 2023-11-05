@@ -24,6 +24,19 @@ local lazy = function()
 end
 
 lazy()
+
+vim.cmd([[hi TelescopeNormal guibg=#303841]])
+vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
+
+-- vim.cmd([[hi MsgArea guibg=#1E313B]])
+-- vim.cmd([[hi MsgArea guibg=#1E293B]])
+-- vim.cmd([[hi MsgArea guibg=#475569]])
+-- vim.cmd([[hi link NoiceCmdlinePopup NormalFloat]])
+-- vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
+-- vim.cmd([[hi NoiceCmdlinePopup guibg=white]])
+
+-- require("luasnip.loaders.from_vscode").lazy_load()
+
 -- vim.cmd [[colorscheme onedark]]
 --
 --local nvim_surround_ops = {
@@ -1047,8 +1060,6 @@ lazy()
 ---- vim.lsp.set_log_level("debug")
 --
 --
---require 'usr.plugins.cmp'
---require("luasnip.loaders.from_vscode").lazy_load()
 --
 ---- vim.api.nvim_create_autocmd({"BufRead"}, {
 ---- callback = function() require'ufo'.closeAllFolds() end,

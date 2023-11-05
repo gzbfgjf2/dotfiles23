@@ -63,7 +63,7 @@ end
 
 local calc_tabline = function(max_lines)
   local tbln = (vim.o.showtabline == 2) or
-  (vim.o.showtabline == 1 and #vim.api.nvim_list_tabpages() > 1)
+      (vim.o.showtabline == 1 and #vim.api.nvim_list_tabpages() > 1)
   if tbln then
     max_lines = max_lines - 1
   end
@@ -77,8 +77,9 @@ end
 --@param w_num number: the maximum number of windows of the picker in the given direction
 --@param b_num number: the number of border rows/column in the given direction (when border enabled)
 --@param s_num number: the number of gaps in the given direction (when border disabled)
-local calc_size_and_spacing = function(cur_size, max_size, bs, w_num, b_num,
-                                       s_num)
+local calc_size_and_spacing = function(
+  cur_size, max_size, bs, w_num, b_num, s_num
+)
   local spacing = s_num * (1 - bs) + b_num * bs
   cur_size = math.min(cur_size, max_size)
   cur_size = math.max(cur_size, w_num + spacing)
@@ -331,15 +332,15 @@ layout_strategies.horizontal = make_documented_layout(
       width, w_space = calc_size_and_spacing(width, max_columns, bs, 2, 4, 1)
 
       preview.width = resolve.resolve_width(vim.F.if_nil(
-      layout_config.preview_width, function(_, cols)
-        if cols < 150 then
-          return math.floor(cols * 0.4)
-        elseif cols < 200 then
-          return 80
-        else
-          return 120
-        end
-      end))(self, width, max_lines)
+        layout_config.preview_width, function(_, cols)
+          if cols < 150 then
+            return math.floor(cols * 0.4)
+          elseif cols < 200 then
+            return 80
+          else
+            return 120
+          end
+        end))(self, width, max_lines)
 
       results.width = width - preview.width - w_space
       prompt.width = results.width
@@ -484,7 +485,7 @@ layout_strategies.center = make_documented_layout(
     results.height = height - prompt.height - h_space
 
     local topline = math.floor((max_lines / 2) -
-    ((results.height + (2 * bs)) / 2) + 1)
+      ((results.height + (2 * bs)) / 2) + 1)
     -- Align the prompt and results so halfway up the screen is
     -- in the middle of this combined block
     if layout_config.prompt_position == "top" then
@@ -541,15 +542,11 @@ layout_strategies.center = make_documented_layout(
       results.line = results.line + 1
       preview.line = preview.line + 1
     end
-    prompt.height = prompt.height -1
+    prompt.height = prompt.height - 1
     prompt.line = 1
     results.line = 2
     preview.line = 27
     preview.height = 41
-
-    -- vim.notify(vim.inspect(prompt))
-    -- vim.notify(vim.inspect(results))
-    vim.notify(vim.inspect(preview))
 
     return {
       preview = self.previewer and preview.height > 0 and preview,
@@ -623,7 +620,7 @@ layout_strategies.cursor = make_documented_layout(
       width, w_space = calc_size_and_spacing(width, max_columns, bs, 2, 4, 0)
 
       preview.width = resolve.resolve_width(vim.F.if_nil(
-      layout_config.preview_width, 2 / 3))(self, width, max_lines)
+        layout_config.preview_width, 2 / 3))(self, width, max_lines)
       prompt.width = width - preview.width - w_space
       results.width = prompt.width
     else
@@ -644,7 +641,7 @@ layout_strategies.cursor = make_documented_layout(
     end)()
     local top_left = {
       line = vim.api.nvim_win_call(winid, vim.fn.winline) + position[1] + bs +
-      winbar,
+          winbar,
       col = vim.api.nvim_win_call(winid, vim.fn.wincol) + position[2],
     }
     local bot_right = {
@@ -741,7 +738,7 @@ layout_strategies.vertical = make_documented_layout(
 
       preview.height =
           resolve.resolve_height(vim.F.if_nil(layout_config.preview_height, 0.5))(
-          self, max_columns, height)
+            self, max_columns, height)
     else
       -- Cap over/undersized height (without previewer)
       height, h_space = calc_size_and_spacing(height, max_lines, bs, 2, 4, 1)
@@ -760,11 +757,11 @@ layout_strategies.vertical = make_documented_layout(
       preview.line = height_padding + (1 + bs)
       if layout_config.prompt_position == "top" then
         prompt.line = (preview.height == 0) and preview.line or
-        preview.line + preview.height + (1 + bs)
+            preview.line + preview.height + (1 + bs)
         results.line = prompt.line + prompt.height + (1 + bs)
       elseif layout_config.prompt_position == "bottom" then
         results.line = (preview.height == 0) and preview.line or
-        preview.line + preview.height + (1 + bs)
+            preview.line + preview.height + (1 + bs)
         prompt.line = results.line + results.height + (1 + bs)
       else
         error(string.format("Unknown prompt_position: %s\n%s",
@@ -865,10 +862,10 @@ layout_strategies.current_buffer = make_documented_layout("current_buffer", {
   if self.previewer then
     results.height = 10 -- TODO(l-kershaw): make this configurable
     preview.height = window_height - results.height - prompt.height -
-    2 * (1 + bs) - 2 * height_padding
+        2 * (1 + bs) - 2 * height_padding
   else
     results.height = window_height - prompt.height - (1 + bs) -
-    2 * height_padding
+        2 * height_padding
     preview.height = 0
   end
 
@@ -915,7 +912,7 @@ layout_strategies.bottom_pane = make_documented_layout(
     max_lines, tbln = calc_tabline(max_lines)
 
     local height = vim.F.if_nil(
-    resolve.resolve_height(layout_config.height)(self, max_columns, max_lines),
+      resolve.resolve_height(layout_config.height)(self, max_columns, max_lines),
       25)
     if type(layout_config.height) == "table" and type(layout_config.height.padding) == "number" then
       -- Since bottom_pane only has padding at the top, we only need half as much padding in total
@@ -941,7 +938,7 @@ layout_strategies.bottom_pane = make_documented_layout(
         2, 4, 0)
 
       preview.width = resolve.resolve_width(vim.F.if_nil(
-      layout_config.preview_width, 0.5))(self, width, max_lines)
+        layout_config.preview_width, 0.5))(self, width, max_lines)
       results.width = width - preview.width - w_space
     else
       results.width = prompt.width
