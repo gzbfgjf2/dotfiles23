@@ -5,7 +5,8 @@ window:
   # decorations: transparent
   # decorations: buttonless
   decorations: none
-  startup_mode: fullscreen
+  # startup_mode: fullscreen
+  startup_mode: maximized
   dynamic_padding: true
   padding:
     x: 5

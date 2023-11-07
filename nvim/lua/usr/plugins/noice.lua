@@ -8,6 +8,7 @@ return {
       -- presets = {
       --   command_palette = true
       -- },
+      -- event = "VeryLazy",
       lsp = {
         hover = {
           enabled = false,
@@ -21,6 +22,12 @@ return {
         },
       },
       views = {
+        mini = {
+          position = {
+            row = 0,
+            col = "100%"
+          }
+        },
         split = {
           position = "right"
         },
@@ -39,12 +46,16 @@ return {
           border = {
             style = "none",
             padding = { 0, 0 }
-          }
+          },
+          position = {
+            row = "3%",
+            col = "50%",
+          },
         },
         cmdline_popup = {
           border = {
             style = "none",
-            -- padding = { 0, 0 }
+            padding = { 0, 0 }
             -- padding = { 1, 2 },
             -- padding = { 0, 1 },
           },
@@ -55,13 +66,14 @@ return {
           size = {
             -- width = 75,
             width = 120,
+            -- width = "100%",
             -- height = 999,
             height = 1
           },
           filter_options = {},
-          win_options = {
-            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-          },
+          -- win_options = {
+          --   winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+          -- },
         },
       },
       notify = {
@@ -70,27 +82,13 @@ return {
       cmdline = {
         -- enabled = false,
         view = "cmdline_popup",
+        -- view = "cmdline",
         format = {
-          conceal = false,
-          cmdline = { pattern = "", icon = "> ", lang = "vim" },
-          search_up = {
-            kind = "search",
-            pattern = "^%?",
-            icon = "?",
-            lang = "regex"
-          },
-          search_down = {
-            kind = "search",
-            pattern = "^/",
-            icon = "/",
-            lang = "regex"
-          },
-          lua = {
-            pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
-            icon = "☾ ",
-            lang = "lua"
-          },
-          help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+          cmdline = false,
+          search_up = false,
+          search_down = false,
+          lua = false,
+          help = false,
         }
       },
       redirect = {

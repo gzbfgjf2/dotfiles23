@@ -19,8 +19,8 @@ end
 
 
 # fish_add_path /usr/local/bin
-# fish_add_path /usr/local/texlive/2023/bin/universal-darwin
-# fish_add_path /usr/local/texlive/
+fish_add_path /usr/local/texlive/2023/bin/universal-darwin
+fish_add_path /usr/local/texlive/
 
 
 . ~/.secrete.fish

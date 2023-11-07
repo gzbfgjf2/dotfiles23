@@ -3,8 +3,8 @@ return {
   config = function()
     require('mason').setup({
       ui = {
-        width = 1,
-        height = 1
+        width = 0.5,
+        height = 0.5
       }
     })
   end

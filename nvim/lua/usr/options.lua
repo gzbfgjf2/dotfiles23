@@ -191,19 +191,19 @@ vim.cmd([[autocmd InsertLeave * :normal `^]])
 --   augroup END
 -- ]])
 --
-vim.cmd([[
-  augroup custom_highlight
-    autocmd!
-    " au ColorScheme onedark highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d
-    " au ColorScheme onedark highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40
-    " au ColorScheme onedark hi VertSplit guibg=#abb2bf guifg=#3b3f4c
-    " au ColorScheme onedark hi CurSearch guibg=#abcabc guifg=#aaabbb
-    " au ColorScheme onedark hi CurSearch guifg=#CCF381 guibg=#4831D4
-    au ColorScheme onedark hi CurSearch guifg=#4831D4 guibg=#CCF381
-    " au ColorScheme catpucin-latte highlight IndentBlanklineIndent2 guifg=245 guibg=120
-    " au ColorScheme catpucin-latte highlight IndentBlanklineIndent2 guifg=100 guibg=120
-  augroup END
-]])
+-- vim.cmd([[
+--   augroup custom_highlight
+--     autocmd!
+--     " au ColorScheme onedark highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d
+--     " au ColorScheme onedark highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40
+--     " au ColorScheme onedark hi VertSplit guibg=#abb2bf guifg=#3b3f4c
+--     " au ColorScheme onedark hi CurSearch guibg=#abcabc guifg=#aaabbb
+--     " au ColorScheme onedark hi CurSearch guifg=#CCF381 guibg=#4831D4
+--     au ColorScheme onedark hi CurSearch guifg=#4831D4 guibg=#CCF381
+--     " au ColorScheme catpucin-latte highlight IndentBlanklineIndent2 guifg=245 guibg=120
+--     " au ColorScheme catpucin-latte highlight IndentBlanklineIndent2 guifg=100 guibg=120
+--   augroup END
+-- ]])
 -- " hi vertsplit guibg=grey guifg=#3b3f4c]
 -- " hi vertsplit guibg=#393fb1 guifg=#3b3f4c
 -- vim.cmd([[color onedark]])
@@ -329,15 +329,15 @@ vim.opt.fillchars = {
 -- hi link StatusLineNC VertSplit
 
 
-if vim.g.neovide then
-  vim.o.guifont = "Hack"
-  vim.opt.linespace = 1
-  vim.g.transparency = 0.5
-  vim.g.neovide_scroll_animation_length = 0
-  vim.g.neovide_hide_mouse_when_typing = true
-  vim.g.neovide_refresh_rate = 100
-  vim.g.neovide_cursor_animation_length = 0
-end
+-- if vim.g.neovide then
+--   vim.o.guifont = "Hack"
+--   vim.opt.linespace = 1
+--   vim.g.transparency = 0.5
+--   vim.g.neovide_scroll_animation_length = 0
+--   vim.g.neovide_hide_mouse_when_typing = true
+--   vim.g.neovide_refresh_rate = 100
+--   vim.g.neovide_cursor_animation_length = 0
+-- end
 
 
 -- Slightly modified from :h setting-tabline:

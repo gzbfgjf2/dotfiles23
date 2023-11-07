@@ -1,11 +1,28 @@
 require "usr.options"
 
 local lazy_opt = {
+  ui = {
+      icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      require = "🌙",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+      lazy = "💤 ",
+    },
+  },
   change_detection = {
     -- automatically check for config file changes and reload the ui
-    enabled = false,
+    enabled = true,
     notify = false, -- get a notification when changes are found
-  }
+  },
 }
 local lazy = function()
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -15,7 +32,7 @@ local lazy = function()
       "clone",
       "--filter=blob:none",
       "https://github.com/folke/lazy.nvim.git",
-      "--branch=stable",
+      "--branch=main",
       lazypath,
     })
   end
@@ -27,12 +44,18 @@ lazy()
 
 vim.cmd([[hi TelescopeNormal guibg=#303841]])
 vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
+vim.cmd([[hi TelescopePreviewNormal guibg=#475569]])
+
+vim.cmd([[hi Normal guibg=None]])
 
 -- vim.cmd([[hi MsgArea guibg=#1E313B]])
 -- vim.cmd([[hi MsgArea guibg=#1E293B]])
 -- vim.cmd([[hi MsgArea guibg=#475569]])
 -- vim.cmd([[hi link NoiceCmdlinePopup NormalFloat]])
--- vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
+vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
+vim.cmd([[hi NoiceCmdlinePopup guibg=None]])
+-- vim.cmd([[hi NoiceCmdlinePopup guibg=]])
+-- vim.cmd([[hi MsgArea guibg=white]])
 -- vim.cmd([[hi NoiceCmdlinePopup guibg=white]])
 
 -- require("luasnip.loaders.from_vscode").lazy_load()
@@ -69,33 +92,6 @@ vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
 --    "sonph/onehalf",
 --    rtp = "vim/",
 --    -- config = function() vim.cmd("colorscheme onehalfdark") end
---  }
---  use { "notomo/cmdbuf.nvim",
---    config = function()
---      vim.keymap.set("n", "q:", function()
---        require("cmdbuf").vsplit_open()
---      end)
---      vim.keymap.set("c", "<C-f>", function()
---        require("cmdbuf").vsplit_open()
---        -- print(vim.keycode("<C-c>"))
---        -- print(key)
---        local key = vim.api.nvim_replace_termcodes("<C-c>", true, false, true)
---        vim.api.nvim_feedkeys(key, "n", true)
---      end)
---      vim.api.nvim_create_autocmd({ "User" }, {
---        group = vim.api.nvim_create_augroup("cmdbuf_setting", {}),
---        pattern = { "CmdbufNew" },
---        callback = function(args)
---          vim.keymap.set("n", "q", [[<Cmd>quit<CR>]],
---            { nowait = true, buffer = true })
---          -- you can filter buffer lines
---          -- local lines = vim.tbl_filter(function(line)
---          --   return line ~= "q"
---          -- end, vim.api.nvim_buf_get_lines(args.buf, 0, -1, false))
---          -- vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, lines)
---        end,
---      })
---    end
 --  }
 --  -- use { "lukas-reineke/virt-column.nvim",
 --  --   config = function()
@@ -208,156 +204,6 @@ vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
 --    require('nvim-ts-autotag')
 --        .setup()
 --  end }
---  -- use({
---  --   "folke/noice.nvim",
---  --   -- event = "VimEnter",
---  --   -- opt = true,
---  --
---  --   config = function()
---  --     require("noice").setup({
---  --       -- presets = {
---  --       --   command_palette = true
---  --       -- },
---  --       lsp = {
---  --         hover = {
---  --           enabled = false,
---  --           silent = true
---  --         },
---  --         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
---  --         override = {
---  --           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
---  --           ["vim.lsp.util.stylize_markdown"] = true,
---  --           ["cmp.entry.get_documentation"] = true,
---  --         },
---  --       },
---  --       views = {
---  --         split = {
---  --           position = "right"
---  --         },
---  --
---  --         confirm = {
---  --           border = {
---  --             style = "none",
---  --             padding = { 0, 0 }
---  --           },
---  --           position = {
---  --             row = "0%",
---  --             col = "50%"
---  --           }
---  --         },
---  --         popup = {
---  --           border = {
---  --             style = "none",
---  --             padding = { 0, 0 }
---  --           }
---  --         },
---  --         cmdline_popup = {
---  --           border = {
---  --             style = "none",
---  --             padding = { 0, 0 }
---  --             -- padding = { 1, 2 },
---  --             -- padding = { 0, 1 },
---  --           },
---  --           position = {
---  --             row = "0%",
---  --             col = "50%",
---  --           },
---  --           size = {
---  --             -- width = 75,
---  --             width = 99,
---  --             -- height = 999,
---  --             height = 1,
---  --           },
---  --           filter_options = {},
---  --           -- win_options = {
---  --           --   winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
---  --           -- },
---  --         },
---  --       },
---  --       notify = {
---  --         -- enabled = false
---  --       },
---  --       cmdline = {
---  --         -- enabled = false,
---  --         view = "cmdline_popup",
---  --         format = {
---  --           conceal = false,
---  --           cmdline = { pattern = "", icon = "> ", lang = "vim" },
---  --           search_up = { kind = "search", pattern = "^%?", icon = "?", lang = "regex" },
---  --           search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
---  --           lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "☾ ", lang = "lua" },
---  --           help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
---  --         }
---  --       },
---  --       redirect = {
---  --         view = "popup",
---  --         filter = { event = "msg_show" },
---  --       },
---  --       messages = {
---  --         -- NOTE: If you enable messages, then the cmdline is enabled automatically.
---  --         -- This is a current Neovim limitation.
---  --         -- enabled = false,            -- enables the Noice messages UI
---  --         view = "popup",            -- default view for messages
---  --         view_error = "mini",       -- view for errors
---  --         view_warn = "mini",        -- view for warnings
---  --         view_history = "popup", -- view for :messages
---  --         -- view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
---  --         view_search = false,       -- view for search count messages. Set to `false` to disable
---  --       },
---  --       format = {
---  --         level = {
---  --           icons = {
---  --             error = "✖",
---  --             warn = "▼",
---  --             info = "●",
---  --           },
---  --         },
---  --       },
---  --       routes = {
---  --         {
---  --           filter = {
---  --             event = "msg_show",
---  --             kind = "",
---  --             -- find = "written",
---  --           },
---  --           view = "mini"
---  --         },
---  --       },
---  --
---  --       popupmenu = {
---  --         enabled = true,  -- enables the Noice popupmenu UI
---  --         ---@type 'nui'|'cmp'
---  --         backend = "nui", -- backend to use to show regular cmdline completions
---  --         ---@type NoicePopupmenuItemKind|false
---  --         -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
---  --         kind_icons = {}, -- set to `false` to disable icons
---  --       },
---  --       commands = {
---  --         history = {
---  --           -- options for the message history that you get with `:Noice`
---  --           view = "popup",
---  --           opts = { enter = true, format = "details" },
---  --           filter = {
---  --             any = {
---  --               { event = "notify" },
---  --               { error = true },
---  --               { warning = true },
---  --               { event = "msg_show", kind = { "" } },
---  --               { event = "lsp",      kind = "message" },
---  --             },
---  --           },
---  --         }
---  --       }
---  --     })
---  --     require("telescope").load_extension("noice")
---  --   end,
---  --   requires = {
---  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
---  --     "MunifTanjim/nui.nvim",
---  --     "rcarriga/nvim-notify",
---  --   }
---  -- })
---  --
 --  use { "jose-elias-alvarez/null-ls.nvim",
 --    config = function()
 --      require("null-ls").setup({

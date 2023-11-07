@@ -1,0 +1,26 @@
+[window]
+# decorations: full
+# decorations: transparent
+# decorations: buttonless
+decorations= "None"
+# startup_mode="Fullscreen"
+startup_mode="Maximized"
+dynamic_padding=true
+padding.x= 5
+padding.y= 1
+option_as_alt= "Both"
+opacity = 0.9
+blur = true
+
+[font]
+size= 13
+# size: 17
+offset.x= 0
+offset.y= 2
+
+[shell]
+program = "/opt/homebrew/bin/fish"
+# use_thin_strokes: true
+# defaults write -g AppleFontSmoothing -int 0
+# https://github.com/alacritty/alacritty/issues/4616
+

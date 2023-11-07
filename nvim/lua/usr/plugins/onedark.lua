@@ -1,3 +1,18 @@
+local light = {
+  highlights = {
+    IndentBlanklineIndent1 = { fg = "#e7edee", bg = "#e7edee" },
+    IndentBlanklineIndent2 = { fg = "#cfd4d5", bg = "#cfd4d5" },
+    EndOfBuffer = { fg = "#282c34", bg = nil }
+  }
+}
+local dark = {
+  highlights = {
+    -- ....
+    IndentBlanklineIndent1 = { fg = "#35383d", bg = "#35383d" },
+    IndentBlanklineIndent2 = { fg = "#3d3e40", bg = "#3d3e40" },
+    EndOfBuffer = { fg = "#282c34" , bg = nil}
+  },
+}
 local config = function()
   local onedark = require("onedark")
   local default_style = "dark"
@@ -9,23 +24,13 @@ local config = function()
         vim.log.levels.ERROR)
       return
     end
+
     if style == "light" then
-      return {
-        highlights = {
-          IndentBlanklineIndent1 = { fg = "#e7edee", bg = "#e7edee" },
-          IndentBlanklineIndent2 = { fg = "#cfd4d5", bg = "#cfd4d5" }
-        }
-      }
+      return light
       -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=242 guibg=#35383d]]
       -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=245 guibg=#3d3e40]]
     end
-    return {
-      highlights = {
-        -- ....
-        IndentBlanklineIndent1 = { fg = "#35383d", bg = "#35383d" },
-        IndentBlanklineIndent2 = { fg = "#3d3e40", bg = "#3d3e40" }
-      },
-    }
+    return dark
   end
 
   local augroup_id = vim.api.nvim_create_augroup("OnedarkStyle", {})
@@ -49,6 +54,7 @@ local config = function()
     highlights = get_theme_overrides(default_style).highlights,
   })
   onedark.load()
+  vim.api.nvim_set_hl(0, "EndOfBuffer", {fg="#282c34"})
 end
 
 
