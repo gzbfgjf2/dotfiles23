@@ -9,18 +9,42 @@ set -g fish_greeting
 # pyenv
 # potentially https://www.reddit.com/r/neovim/comments/ga0s7w/use_python_venv_with_neovim/
 if set -q SHLVL; and test $SHLVL -eq 1
-    # fish_add_path /opt/homebrew/bin
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    pyenv init - | source
-    set -gx PATH ~/.local/share/nvm/$nvm_default_version/bin $PATH
+    if not contains /usr/local/bin $PATH
+        set -gx PATH /usr/local/bin $PATH
+        # fish_add_path /usr/local/texlive/
+    end
+    if not contains /usr/local/texlive/2023/bin/universal-darwin $PATH
+        set -gx PATH /usr/local/texlive/2023/bin/universal-darwin $PATH
+        # fish_add_path /usr/local/texlive/
+    end
+    if not contains /opt/homebrew/bin $PATH
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    end
+    if not contains $HOME/.pyenv/bin $PATH
+        pyenv init - | source
+    end
+    # if not contains $HOME/.local/share/nvm/$nvm_default_version/bin $PATH
+    #     set -gx PATH $HOME/.local/share/nvm/$nvm_default_version/bin $PATH
+    # end
+    if not contains $HOME/.local/bin $PATH
+        set -gx PATH $HOME/.local/bin $PATH
+    end
+    fish_add_path -m -P $HOME/.local/share/nvm/$nvm_default_version/bin $PATH
+    . ~/app/google-cloud-sdk/path.fish.inc
+    . ~/.secrete.fish
 end
 
-. ~/app/google-cloud-sdk/path.fish.inc
+function event_handler --on-event fish_preexec
+   # echo "Custom event was triggered with these args: $argv"
+   printf \n
+end
+function post_handler --on-event fish_postexec
+   # echo "Custom event was triggered with these args: $argv"
+   printf \n
+   printf \n
+end
 
 
 # fish_add_path /usr/local/bin
-fish_add_path /usr/local/texlive/2023/bin/universal-darwin
-fish_add_path /usr/local/texlive/
 
 
-. ~/.secrete.fish

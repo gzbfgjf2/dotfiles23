@@ -7,3 +7,4 @@ ln -s ~/src/dotfiles/fish ~/.config/fish
 ln -s ~/src/dotfiles/nvim ~/.config/nvim
 ln -s ~/src/dotfiles/alacritty ~/.config/alacritty
 
+ln -s ~/src/dotfiles/tex/.indentconfig.yaml ~/.indentconfig.yaml

@@ -1,4 +1,5 @@
 return {
+  -- enabled = false,
   "folke/noice.nvim",
   -- event = "VimEnter",
   -- opt = true,
@@ -10,9 +11,20 @@ return {
       -- },
       -- event = "VeryLazy",
       lsp = {
+        message = {
+          -- Messages shown by lsp servers
+          enabled = true,
+          view = "popup",
+          opts = {},
+        },
+        -- enabled= false,
         hover = {
-          enabled = false,
-          silent = true
+          -- enabled = false,
+          -- silent = true
+        },
+        signature = {
+          -- enabled = false,
+          -- silent = true
         },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
@@ -20,13 +32,23 @@ return {
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
+        presets = {
+          -- bottom_search = true,   -- use a classic bottom cmdline for search
+          -- command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          -- lsp_doc_border = false, -- add a border to hover docs and signature help
+        }
       },
       views = {
         mini = {
           position = {
             row = 0,
             col = "100%"
-          }
+          },
+          win_options = {
+            winblend = 0
+          },
         },
         split = {
           position = "right"
@@ -77,7 +99,8 @@ return {
         },
       },
       notify = {
-        enabled = false
+        enabled = true,
+        view = "mini"
       },
       cmdline = {
         -- enabled = false,
@@ -89,6 +112,7 @@ return {
           search_down = false,
           lua = false,
           help = false,
+          -- input = false,
         }
       },
       redirect = {
@@ -99,7 +123,7 @@ return {
         -- NOTE: If you enable messages, then the cmdline is enabled automatically.
         -- This is a current Neovim limitation.
         -- enabled = false,            -- enables the Noice messages UI
-        view = "popup",         -- default view for messages
+        view = "mini",          -- default view for messages
         view_error = "mini",    -- view for errors
         view_warn = "mini",     -- view for warnings
         view_history = "popup", -- view for :messages
@@ -118,7 +142,7 @@ return {
       routes = {
         {
           filter = {
-            event = "msg_show",
+            event = { "msg_show" },
             kind = "",
             -- find = "written",
           },
@@ -156,6 +180,6 @@ return {
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
+    -- "rcarriga/nvim-notify",
   }
 }

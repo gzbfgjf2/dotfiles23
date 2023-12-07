@@ -37,8 +37,8 @@ local lsp_setup = function()
     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'gd',
       function() vim.lsp.buf.definition { on_list = on_list } end, bufopts)
-    -- vim.keymap.set('n', '<leader>gf',
-    --   function() vim.lsp.buf.definition { on_list = on_list_lopen } end, bufopts)
+    vim.keymap.set('n', '<leader>gf',
+      function() vim.lsp.buf.definition { on_list = on_list_lopen } end, bufopts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
@@ -120,7 +120,13 @@ local lsp_setup = function()
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
-
+    --
+  })
+  require("lspconfig").eslint.setup({
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+    --
   })
 
   require("lspconfig")["lua_ls"].setup({
@@ -149,7 +155,7 @@ local lsp_setup = function()
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
-    settings = { texlab = { latexFormatter = "none" } }
+    -- settings = { texlab = { latexFormatter = "none" } }
   })
 
   require 'lspconfig'.jsonls.setup({
@@ -163,9 +169,12 @@ local lsp_setup = function()
     flags = lsp_flags,
     capabilities = capabilities
   }
-
   -- vim.lsp.set_log_level("debug")
-
+  -- require 'lspconfig'.marksman.setup {
+  --   on_attach = on_attach,
+  --   flags = lsp_flags,
+  --   capabilities = capabilities
+  -- }
 
   --  require 'usr.plugins.cmp'
   --  require("luasnip.loaders.from_vscode").lazy_load()

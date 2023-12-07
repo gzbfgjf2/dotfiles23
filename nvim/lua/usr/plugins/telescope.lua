@@ -8,6 +8,7 @@ return {
     require("telescope").setup({
       defaults = {
         -- theme = "dropdown",
+        winblend = 20,
         sorting_strategy = "ascending",
         layout_strategy = "center",
         border = false,
@@ -22,7 +23,7 @@ return {
         preview = { msg_bg_fillchar = ' ' },
         layout_config = {
           anchor = "N",
-          width = 120
+          width = 112
         },
         mappings = {
           i = {

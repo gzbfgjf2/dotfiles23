@@ -1,5 +1,7 @@
 return {
   'stevearc/oil.nvim',
+  -- keys = "-",
+  -- cmd = { "Oil", "Telescope" },
   config = function()
     require('oil').setup(
       {

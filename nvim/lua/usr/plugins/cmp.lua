@@ -99,7 +99,8 @@ local cmp_config = function()
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<CR>'] = cmp.mapping.confirm({ select = false }),
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -123,10 +124,10 @@ local cmp_config = function()
     sources = cmp.config.sources({
       {
         name = 'nvim_lsp',
-        entry_filter = function(entry, ctx)
-          return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~=
-              'Text'
-        end
+        -- entry_filter = function(entry, ctx)
+        --   return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~=
+        --       'Text'
+        -- end
       },
       { name = 'nvim_lua' },
       { name = 'path' },
@@ -166,27 +167,34 @@ local cmp_config = function()
 end
 
 return {
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-nvim-lua",
-  "onsails/lspkind.nvim",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "hrsh7th/cmp-cmdline",
-  "roobert/tailwindcss-colorizer-cmp.nvim",
-  "dmitmel/cmp-cmdline-history",
-  { "hrsh7th/nvim-cmp", config = cmp_config },
+  {
+    "hrsh7th/nvim-cmp",
+    config = cmp_config,
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-cmdline",
+      "onsails/lspkind.nvim",
+      "roobert/tailwindcss-colorizer-cmp.nvim",
+      "dmitmel/cmp-cmdline-history",
+      'saadparwaiz1/cmp_luasnip'
+    },
+  },
   {
     'L3MON4D3/LuaSnip',
+    -- lazy = true,
     version = "v2.*",
     build = "make install_jsregexp",
+    event = "InsertEnter",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
     dependencies = "rafamadriz/friendly-snippets",
   },
-  "rafamadriz/friendly-snippets",
-  'saadparwaiz1/cmp_luasnip'
+  -- { "rafamadriz/friendly-snippets", event = "VeryLazy" },
 }
 -- vim.cmd('set completeopt=menu,menuone,noselect')
 -- Set up nvim-cmp.
-

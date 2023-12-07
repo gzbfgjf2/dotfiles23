@@ -143,7 +143,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "javascript", "javascriptreact", "typescriptreact", "html", "css",
     "typescript", "json", "jsonc" },
-  command = "setlocal shiftwidth=2 tabstop=2 ts=2 sts=2 sw=2 expandtab",
+  command =
+  "setlocal shiftwidth=2 tabstop=2 ts=2 sts=2 sw=2 expandtab textwidth=79 formatoptions+=t",
 })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "yaml" },
@@ -156,6 +157,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "plaintex" },
   command = "setlocal ts=2 sts=2 sw=2 expandtab textwidth=79",
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "plaintex", "tex", "markdown", "text" },
+  command = "setlocal spell",
 })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "lua" },
@@ -205,7 +210,7 @@ vim.cmd([[autocmd InsertLeave * :normal `^]])
 --   augroup END
 -- ]])
 -- " hi vertsplit guibg=grey guifg=#3b3f4c]
--- " hi vertsplit guibg=#393fb1 guifg=#3b3f4c
+-- vim.cmd[[hi vertsplit guibg=#393fb1 guifg=#3b3f4c]]
 -- vim.cmd([[color onedark]])
 -- keymaps
 -- vim.keymap.set('n', '<tab>', '<ESC>', { noremap = true })
@@ -233,7 +238,7 @@ vim.keymap.set('n', "<Leader>eluf", ":e ~/.config/nvim/lua/usr<Enter>",
 vim.keymap.set('n', "<Leader>sinl", ":luafile ~/.config/nvim/init.lua<Enter>",
   { noremap = true })
 vim.keymap.set('n', "<Leader>ealy",
-  ":e ~/.config/alacritty/alacritty.yml<Enter>", { noremap = true })
+  ":e ~/.config/alacritty/alacritty.toml<Enter>", { noremap = true })
 vim.keymap.set('n', "<Leader>etdt", ":e ~/.todo/todo.txt<Enter>",
   { noremap = true })
 vim.keymap.set('n', "<Leader>ecff", ":e ~/.config/fish/config.fish<Enter>",
