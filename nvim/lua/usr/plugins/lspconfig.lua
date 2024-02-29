@@ -49,7 +49,7 @@ local lsp_setup = function()
     -- end, bufopts)
     vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-    -- vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, bufopts)
+    vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, bufopts)
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
     vim.keymap.set("n", "gbr", vim.lsp.buf.references, bufopts)
     vim.keymap.set("n", "<space>f",
@@ -159,6 +159,12 @@ local lsp_setup = function()
   })
 
   require 'lspconfig'.jsonls.setup({
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+  })
+
+  require 'lspconfig'.phpactor.setup({
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities

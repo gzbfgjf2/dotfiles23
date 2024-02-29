@@ -29,6 +29,9 @@ if set -q SHLVL; and test $SHLVL -eq 1
     if not contains $HOME/.local/bin $PATH
         set -gx PATH $HOME/.local/bin $PATH
     end
+    if not contains $HOME/.cargo/bin $PATH
+        set -gx PATH $HOME/.cargo/bin $PATH
+    end
     fish_add_path -m -P $HOME/.local/share/nvm/$nvm_default_version/bin $PATH
     . ~/app/google-cloud-sdk/path.fish.inc
     . ~/.secrete.fish

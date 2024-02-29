@@ -19,6 +19,7 @@ return {
             "--write", "--prose-wrap", "always", "--print-width", "79"
           }
         }),
+        ls.builtins.formatting.phpcsfixer
       }
     })
   end,

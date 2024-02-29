@@ -12,12 +12,13 @@ vim.o.expandtab = true
 vim.o.autoindent = true
 vim.o.splitright = true
 vim.o.signcolumn = "no"
-vim.o.pumblend = 15
+-- vim.o.pumblend = 15
 -- vim.o.tw = 79
 -- vim.o.nuw = 1
 vim.o.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
 -- vim.o.guicursor= "v-c-sm:block,n-i-ci-ve:ver25,r-cr-o:hor20"
 
+vim.g.tex_flavor = 'latex'
 vim.o.so = 999
 vim.o.ve = "onemore"
 -- vim.o.showmode= false

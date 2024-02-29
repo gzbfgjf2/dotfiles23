@@ -8,9 +8,10 @@ return {
     require("telescope").setup({
       defaults = {
         -- theme = "dropdown",
-        winblend = 20,
+        -- winblend = 10,
         sorting_strategy = "ascending",
-        layout_strategy = "center",
+        -- layout_strategy = "center",
+        layout_strategy = "bottom_pane",
         border = false,
         prompt_title = "",
         results_title = "",
@@ -23,7 +24,8 @@ return {
         preview = { msg_bg_fillchar = ' ' },
         layout_config = {
           anchor = "N",
-          width = 112
+          -- width = 112
+          width = 0.9999
         },
         mappings = {
           i = {
@@ -38,17 +40,21 @@ return {
         }
       },
     })
+
     -- vim.cmd([[hi TelescopeNormal guibg=#31353f]])
     -- vim.cmd([[hi TelescopeNormal guibg=#331D2C]])
     -- vim.cmd([[hi TelescopeNormal guibg=#303841]])
     -- vim.cmd([[hi TelescopeNormal guibg=#4C566A]])
     -- vim.cmd([[hi TelescopeNormal guibg=#222831]])
+    -- vim.cmd([[hi TelescopeNormal guibg=#303841]])
     --
     -- vim.cmd([[hi TelescopePreviewNormal guibg=#302835]])
     -- vim.cmd([[hi TelescopePreviewNormal guibg=#3F2E3E]])
     -- vim.cmd([[hi TelescopePreviewNormal guibg=#3A4750]])
     -- vim.cmd([[hi TelescopePreviewNormal guibg=#2E3440]])
     -- vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
+    -- vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
+    -- vim.cmd([[hi TelescopePreviewNormal guibg=#475569]])
     --
     -- vim.cmd([[hi TelescopePromptNormal guibg=#3B4252]])
     -- vim.cmd([[hi TelescopePromptNormal guibg=#475569]])

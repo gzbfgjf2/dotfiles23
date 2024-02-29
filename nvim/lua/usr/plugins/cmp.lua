@@ -14,10 +14,10 @@ local cmp_config = function()
     }
   }
 
-  vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
-  vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
-  vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
-  vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+  -- vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
+  -- vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+  -- vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
+  -- vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
 
   local import_luasnip, luasnip = pcall(require, 'luasnip')
   if not import_luasnip then return end
@@ -27,7 +27,7 @@ local cmp_config = function()
     sources = cmp.config.sources({
       { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
     }, {
-      { name = 'buffer', keyword_length = 5 },
+      { name = 'buffer', keyword_length = 3 },
     })
   })
 
@@ -48,6 +48,7 @@ local cmp_config = function()
   --     { name = 'path' },
   --   })
   -- })
+
   cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
@@ -59,8 +60,11 @@ local cmp_config = function()
       end,
     },
     window = {
+      completion = {
+        scrollbar = false,
+      },
       -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered({ border = false }),
     },
     mapping = cmp.mapping.preset.insert({
       -- ["<C-n>"] = cmp.mapping({

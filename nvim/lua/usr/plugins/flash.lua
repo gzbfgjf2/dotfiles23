@@ -44,7 +44,7 @@ return {
   config = function()
     require('flash').setup({
       -- label = { after = true, before = false },
-      modes = { char = { enabled = false },
+      modes = { search = { enabled = false }, char = { enabled = false },
       },
     })
   end

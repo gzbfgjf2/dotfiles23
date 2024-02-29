@@ -45,15 +45,21 @@ lazy()
 --   background_colour = "#000000",
 -- })
 
+
+vim.cmd([[hi TelescopeNormal guibg=#303841]])
+vim.cmd([[hi TelescopePromptNormal guibg=#343434]])
+vim.cmd([[hi TelescopePreviewNormal guibg=#475569]])
+--
+--
+--
+--
+-- vim.cmd([[hi Normal guibg=None]])
+
+-- vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
 -- vim.cmd([[hi TelescopeNormal guibg=#303841]])
 -- vim.cmd([[hi TelescopePreviewNormal guibg=#393E46]])
 -- vim.cmd([[hi TelescopePreviewNormal guibg=#475569]])
-
-vim.cmd([[hi Normal guibg=None]])
-
-vim.cmd([[hi NoiceCmdlinePopup guibg=#475569]])
-vim.cmd([[hi NoiceCmdlinePopup guibg=None]])
-vim.cmd([[hi vertsplit guibg=#3b3f4c guifg=#3b3f4c]])
+-- vim.cmd([[hi NoiceCmdlinePopup guibg=None]])
 
 -- vim.cmd([[hi MsgArea guibg=#1E313B]])
 -- vim.cmd([[hi MsgArea guibg=#1E293B]])

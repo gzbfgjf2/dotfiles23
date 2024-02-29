@@ -18,6 +18,8 @@ return {
         keymaps = {
           ["="] = "actions.cd",
           ["`"] = false,
+          ["<C-v>"] = "actions.select_vsplit",
+          ["<C-s>"] = false,
         }
       }
     )
