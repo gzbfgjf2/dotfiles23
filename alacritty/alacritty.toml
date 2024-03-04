@@ -5,25 +5,25 @@
 # decorations = "transparent"
 # decorations = "buttonless"
 decorations= "None"
-startup_mode="Fullscreen"
-# startup_mode="Maximized"
+# startup_mode="Fullscreen"
+startup_mode="Maximized"
 dynamic_padding=true
 padding.x= 5
 padding.y= 1
-option_as_alt= "Both"
-# opacity = 0.8
-# blur = true
+option_as_alt = "Both"
+opacity = 0.85
+blur = true
 # position.x = 875
 # position.y = 20
 # dimensions.columns = 110
 # dimensions.lines = 65
 
 [font]
-size= 13
+size= 12
 # size: 17
 offset.x= 0
 offset.y= 2
-normal.family= "Hack"
+# normal.family= "Hack"
 # italic.style = "normal"
 
 
@@ -33,18 +33,23 @@ program = "/opt/homebrew/bin/fish"
 # defaults write -g AppleFontSmoothing -int 0
 # https://github.com/alacritty/alacritty/issues/4616
 
-[colors.normal]
-green = "#9fdd69"
 [colors.primary]
   # Default colors
-background= '0x282c34'
+# background= '0x282c34'
+background= '0x000000'
 foreground= '0xabb2bf'
-# white = "#ffffff"
-# [colors.primary]
-#
+
+
 # background = "#000000"
 # foreground = "#ffffff"
 # bright_foreground = "#ffffff"
+
+
+[colors.normal]
+# green = "0x9fdd69"
+# blue = "0x73C2FB"
+# blue = "#89CFEF"
+# white = "#ffffff"
 
 
 # [[keyboard.bindings]]

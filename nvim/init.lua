@@ -1,4 +1,5 @@
 require "usr.options"
+require "usr.terminal"
 
 local lazy_opt = {
   ui = {
@@ -21,7 +22,8 @@ local lazy_opt = {
   change_detection = {
     -- automatically check for config file changes and reload the ui
     enabled = true,
-    notify = false, -- get a notification when changes are found
+    -- get a notification when changes are found
+    notify = false,
   },
 }
 local lazy = function()

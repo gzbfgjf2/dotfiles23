@@ -175,13 +175,13 @@ local lsp_setup = function()
     flags = lsp_flags,
     capabilities = capabilities
   }
-  -- vim.lsp.set_log_level("debug")
-  -- require 'lspconfig'.marksman.setup {
-  --   on_attach = on_attach,
-  --   flags = lsp_flags,
-  --   capabilities = capabilities
-  -- }
+  require 'lspconfig'.marksman.setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+  }
 
+  -- vim.lsp.set_log_level("debug")
   --  require 'usr.plugins.cmp'
   --  require("luasnip.loaders.from_vscode").lazy_load()
 

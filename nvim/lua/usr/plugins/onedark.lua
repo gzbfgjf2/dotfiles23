@@ -33,7 +33,7 @@ end
 
 local config = function()
   local onedark = require("onedark")
-  local default_style = "dark"
+  local default_style = "darker"
   local augroup_id = vim.api.nvim_create_augroup("OnedarkStyle", {})
   vim.api.nvim_clear_autocmds({ group = augroup_id })
   vim.api.nvim_create_autocmd("ColorSchemePre", {
@@ -49,6 +49,7 @@ local config = function()
   onedark.setup({
     toggle_style_key = "<leader>ts",
     toggle_style_list = { "light", "darker", "cool", "deep", "warm", "warmer", "dark" },
+    style = "dark"
     -- highlights = get_theme_overrides(default_style).highlights,
   })
   onedark.load()

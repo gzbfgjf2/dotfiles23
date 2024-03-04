@@ -40,9 +40,15 @@ end
 function event_handler --on-event fish_preexec
    # echo "Custom event was triggered with these args: $argv"
    printf \n
+   printf \n
 end
 function post_handler --on-event fish_postexec
    # echo "Custom event was triggered with these args: $argv"
+   printf \n
+   printf \n
+   # set -l line_width (tput cols)
+   # printf '%*s\n' $line_width '' | tr ' ' '—'
+   printf '———'
    printf \n
    printf \n
 end
