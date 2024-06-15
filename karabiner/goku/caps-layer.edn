@@ -3,9 +3,16 @@
     {
       :des "common"
       :rules [
-        [:##caps_lock ["mode" 1]]
-        [:##spacebar ["mode" 0] ["mode" 1]]
-        [:##tab ["mode" 0] ["mode" 1]]
+        [:##caps_lock ["mode" 1] ["mode" 0]]
+        [:##caps_lock ["mode" 1] ["mode" 2]]
+        [:##caps_lock ["mode" 1] ["mode" 3]]
+        [:##caps_lock ["mode" 1] ["mode" 4]]
+        ; [:##spacebar ["mode" 0] ["mode" 2]]
+        ; [:##spacebar ["mode" 0] ["mode" 3]]
+        ; [:##spacebar ["mode" 0] ["mode" 1]]
+        ; [:##tab ["mode" 0] ["mode" 1]]
+        [:##h ["mode" 0] ["mode" 1]]
+        [:##caps_lock ["mode" 1] ["mode" 1]]
       ]
     }
     {
@@ -16,6 +23,23 @@
       [:##s :left_control ["mode" 2]]
       [:##d :left_alt ["mode" 2]]
       [:##f :left_command ["mode" 2]]
+     ]
+    }{
+     :des "left-modifier right navigation"
+     :rules [
+      [:##d ["mode" 4] ["mode" 1]]
+      [:##a :left_shift ["mode" 4]]
+      [:##s :left_control ["mode" 4]]
+      [:##d :left_alt ["mode" 4]]
+      [:##f :left_command ["mode" 4]]
+      [:##h :left_arrow ["mode" 4]]
+      [:##j :down_arrow ["mode" 4]]
+      [:##k :up_arrow ["mode" 4]]
+      [:##l :right_arrow ["mode" 4]]
+      [:##n :home ["mode" 4]]
+      [:##m :page_down ["mode" 4]]
+      [:##comma :page_up ["mode" 4]]
+      [:##period :end ["mode" 4]]
      ]
     }
     {
