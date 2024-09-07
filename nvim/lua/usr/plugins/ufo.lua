@@ -1,17 +1,19 @@
+local zr_refresh = function()
+  require("ufo").openAllFolds()
+  -- require('indent_blankline').refresh()
+end
+
+local zm_refresh = function()
+  require("ufo").closeAllFolds()
+  -- require('indent_blankline').refresh()
+end
+
 local config = function()
   require('ufo').setup({
     provider_selector = function(bufnr, filetype, buftype)
       return { 'treesitter', 'indent' }
     end
   })
-  local zr_refresh = function()
-    require("ufo").openAllFolds()
-    -- require('indent_blankline').refresh()
-  end
-  local zm_refresh = function()
-    require("ufo").closeAllFolds()
-    -- require('indent_blankline').refresh()
-  end
   -- capabilities.textDocument.foldingRange = {
   --   dynamicRegistration = false,
   --   lineFoldingOnly = true
@@ -31,5 +33,6 @@ end
 return {
   "kevinhwang91/nvim-ufo",
   dependencies = "kevinhwang91/promise-async",
+  run = ':TSUpdate',
   config = config
 }
