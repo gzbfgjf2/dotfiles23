@@ -5,25 +5,29 @@
 # decorations = "transparent"
 # decorations = "buttonless"
 decorations= "None"
-# startup_mode="Fullscreen"
-startup_mode="Maximized"
+startup_mode="Fullscreen"
+# startup_mode="Maximized"
 dynamic_padding=true
 padding.x= 5
 padding.y= 1
 option_as_alt = "Both"
-opacity = 0.85
-blur = true
+# opacity = 0.1
+# blur = true
 # position.x = 875
 # position.y = 20
 # dimensions.columns = 110
 # dimensions.lines = 65
 
 [font]
-size= 12
+size = 16
 # size: 17
 offset.x= 0
 offset.y= 2
-# normal.family= "Hack"
+normal.family = "Hack Nerd Font"
+bold.family = "Hack Nerd Font"
+# bold.style = "bold"
+italic.family = "Hack Nerd Font"
+# normal.family = "Hack"
 # italic.style = "normal"
 
 
@@ -35,8 +39,8 @@ program = "/opt/homebrew/bin/fish"
 
 [colors.primary]
   # Default colors
-# background= '0x282c34'
-background= '0x000000'
+background= '0x282c34'
+# background= '0x000000'
 foreground= '0xabb2bf'
 
 
