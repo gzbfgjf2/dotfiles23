@@ -5,7 +5,7 @@ vim.o.relativenumber = true
 vim.o.cmdheight = 0
 vim.o.laststatus = 0
 -- vim.o.laststatus = 2
-vim.o.syntax = true
+-- vim.o.syntax = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
@@ -23,7 +23,7 @@ vim.o.so = 999
 vim.o.ve = "onemore"
 -- vim.o.showmode= false
 
-vim.o.showtabline = false
+vim.o.showtabline = 0
 
 
 vim.o.shell = "fish"
